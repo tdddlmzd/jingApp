@@ -1,0 +1,64 @@
+<ion-view title="{{viewTitle}}" hide-back-button="true">
+  <ion-nav-buttons side="left">
+    <a href="javascript:history.back(-1)" class="button button-icon icon ion-ios-arrow-back" nav-direction="back"></a>
+ </ion-nav-buttons>
+
+  <ion-content class="padding">
+    <a href="#/tab/yang-vip/{{paramId}}">
+      接收到参数：{{paramId}}<br>{{'sjcq_gz'| translate}}
+    </a>
+  </ion-content>
+  <!-- 日期控件 -->
+  <ion-content class="padding" style="margin-top: 100px;">
+    <div on-tap="openDatePicker()" >
+      <span style="color:#f75a0e" ng-bind="$parent.validedTime | date:'yyyy-MM-dd'"></span>
+    </div>
+  </ion-content>
+
+  <ion-content class="padding" style="margin-top: 150px;">
+    <button ng-click="showAlert()">弹窗测试</button>
+    <button ng-click="switchlang()">切换语言</button>
+    <button ng-click="locationTest()">本地缓存测试</button>
+    <button ng-click="httpgetTest()">$http.get测试</button>
+    <button ng-click="httpgetTest2()">$http.get2测试</button>
+  </ion-content>
+
+  <ion-content class="padding" style="margin-top: 200px;">
+    <button ng-click="openCamera()">调用相机1</button>
+    <button ng-click="getCamera()">调用相机2</button>
+    <button ng-click="postUploadFile()">调用相机3</button>
+    <button ng-click="takePhoto()">调用相机4</button>
+  </ion-content>
+
+  <ion-content class="padding" style="margin-top: 250px;">
+    <button ng-click="openImagePicker()">调用相册</button>
+    <img ng-repeat="item in imgList " ng-src="{{item}}">
+    <button ng-click="getPermissions()">获取权限</button>
+    <span>{{permissions}}</span>
+    <span>{{permissions2}}</span>
+    <button ng-click="getPermissions_2()">获取权限2</button>
+  </ion-content>
+
+  <ion-content class="padding" style="margin-top: 300px;">
+    <button ng-click="tidanhaoTest()">录入提单号接口</button>
+    <button ng-click="switchTitle()">switchTitle</button>
+  </ion-content>
+
+  <ion-content class="padding" style="margin-top: 350px;">
+    <button ng-click="mapTest1()">地图接口</button>
+    <button ng-click="getRouteInfo()">路径管理地图</button>
+    <button ng-click="getShipInfo()">船信息</button>
+    <button ng-click="openQQ()">唤醒QQ</button>
+    <button ng-click="dongtai()">动态变量</button>
+  </ion-content>
+
+  <ion-content class="padding" style="margin-top: 400px;">
+    <button ng-click="httpTest4()">http测试</button>
+    <button ng-click="timeTest()">刘嵩时间</button>
+    <button ng-click="goto_ZM_Test()">赵敏跳页</button>
+    <button ng-click="goto_ZC_Test()">郑中江注册</button>
+    <button ng-click="zhaominTest1()">赵敏测试1</button>
+    <button ng-click="loadingTest()">加载动画 </button>
+    <button ng-click="toGZList()">跳转至跟踪列表 </button>
+  </ion-content>
+</ion-view>

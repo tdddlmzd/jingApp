@@ -1,0 +1,186 @@
+<ion-view 
+    view-title="{{'sjgz_wdgz' | translate }}"
+    ng-init="initList()" 
+    ng-class="{true : 'white_words',false : 'words'}[!isShowNav]" 
+    hide-back-button="true" 
+    hide-nav-bar="!isShowNav"
+>
+    <ion-content scroll="false" style="touch-action: none;">
+        <!-- 登录 -->
+        <div id="lb">
+            <div style="width: 100%;position: relative;">
+                <div style="width: 16px;height: 33px;position: absolute;top: 9px;right: 0;background: #072c4c;z-index: 10;pointer-events: none;"></div>
+                <img src="../img/yin_right.png" style="display: block;width: 14px;height: 40px;position: absolute;top: 6px;right: 16px;z-index: 10;pointer-events: none;">
+                <ion-scroll style="background-color: #072c4c;" direction="x" scrollbar-x="false">
+                    <ul class="gtit">
+                        <li ng-class="{true : 'on',false : ''}[clickHeaderIndex == 1]" ng-click="listSearchFun(trackListAll,'track_qb',1)" id="track_qb">
+                            <span>{{'sjgz_tjqb'|translate}}</span><span>{{ '(' + all_number + ')'}}</span>
+                        </li>
+                        <li ng-class="{true : 'on',false : ''}[clickHeaderIndex == 2]" ng-click="listSearchFun(BeforeDeparture,'track_lgq',2)" id="track_lgq">
+                            <span>{{'sjgz_lgq'|translate}}</span><span>{{ '(' + lgq_number + ')'}}</span>
+                        </li>
+                        <li ng-class="{true : 'on',false : ''}[clickHeaderIndex == 3]" ng-click="listSearchFun(InTransit,'track_zt',3)" id="track_zt">
+                            <span>{{'sjgz_zt'|translate}}</span><span>{{ '(' + zt_number + ')'}}</span>
+                        </li>
+                        <li ng-class="{true : 'on',false : ''}[clickHeaderIndex == 4]" ng-click="listSearchFun(destination,'track_dg',4)" id="track_dg">
+                            <span>{{'sjgz_dg'|translate}}</span><span>{{ '(' + dg_number + ')'}}</span>
+                        </li>
+                        <li ng-class="{true : 'on',false : ''}[clickHeaderIndex == 5]" ng-click="listSearchFun(emptyArray,'track_wc',5)" id="track_wc">
+                            <span>{{'sjgz_wc'|translate}}</span><span>{{ '(' + wc_number + ')'}}</span>
+                        </li>
+                        <li ng-class="{true : 'on',false : ''}[clickHeaderIndex == 6]" ng-click="listSearchFun(noData,'track_yc',6)" id="track_yc">
+                            <span>{{'sjgz_yc'|translate}}</span><span>{{ '(' + YC_number + ')'}}</span>
+                        </li>
+                        <li ng-class="{true : 'on',false : ''}[clickHeaderIndex == 7]" ng-click="listSearchFun(searchQuery,'track_cx',7)" id="track_cx">
+                            <span>{{'sjgz_cx'|translate}}</span><span>{{ '(' + CX_number + ')'}}</span>
+                        </li>
+                        <div style="padding:8px;"></div>
+                    </ul>
+                </ion-scroll>
+            </div>
+            <div class="posi_gzshow" ng-class="{true : 'posi_gzshow_white',false : ''}[trackList.length==0]">
+                <dl ng-if="trackList.length==0">
+                    <p class="img_p"><img src="/img/img_wushuju@2x.png" class="zwsj_img"></p>
+                    <p class="tishib">{{'sjcq_mqzusj' | translate }}</p>
+                </dl>
+                <ion-scroll ng-if="trackList.length!=0" direction="y" scroll-height2 delegate-handle="myscroll">
+                    <ul class="ship_lei">
+                        <li class="on" ng-click="trackTypeClick('searchTime1','vslname1')" id="searchTime">
+                            <a>{{'sjgz_axzr' | translate }}</a>
+                        </li>
+                        <li class="" ng-click="trackTypeClick('dlpttime1','vslname1')" id="dlpttime">
+                            <a>{{'sjgz_algr' | translate }}</a>
+                        </li>
+                    </ul>
+                    <dl class="gzshow_list" ng-repeat="item in trackList" ng-click="trackDetailPage(item)" on-hold="handleHoldDelete(item)">
+                        <dt>
+                            <em ng-if="item.datatype==0"><i class="gzshow_notes"></i>{{item.referenceno==""?"&nbsp":item.referenceno.toUpperCase()}}</em>
+                            <em ng-if="item.datatype==1"><i class="gzshow_ships"></i>{{item.vslname==""?"&nbsp":item.vslname}}</em>
+                            <span>{{GetTime_Day(item.currentnodetime)}}</span>
+                        </dt>
+                        <!--船跟踪-->
+                        <div class="content" ng-if="item.datatype==1 && item.resultState==0">
+                            <div class="content_main">
+                                <p class="main_p">
+                                    <span class="cirle"></span>
+                                    <span class="etdEta" ng-if="item.atd">ATD:{{GetTimeDay(item.atd)}}</span>
+                                    <span class="etdEta" ng-if="item.atd==null || item.atd==''">ETD:{{GetTimeDay(item.etd)}}</span>
+                                    <span class="gangk">{{item.pol.length>13?item.pol.toUpperCase().substr(0,12)+"...":item.pol.toUpperCase()}}</span>
+                                </p>
+                                <p class="main_p">
+                                    <span class="cirle"></span>
+                                    <span class="etdEta" ng-if="item.ata">ATA:{{GetTimeDay(item.ata)}}</span>
+                                    <span class="etdEta" ng-if="item.ata==null || item.ata==''">ETA:{{GetTimeDay(item.eta)}}</span>
+                                    <span class="gangk">{{item.dtp.length>13?item.dtp.toUpperCase().substr(0,12)+"...":item.dtp.toUpperCase()}}</span>
+                                </p>
+                                <p class="content_fixed">
+                                    <span class="main">{{item.currentnode|currentNode}}</span>
+                                    <i class="new" ng-if="item.updateMark==1"></i>
+                                    <i class="icon_trackList"></i>
+                                </p>
+                            </div>
+                        </div>
+
+                        <dd ng-if="item.datatype==1 && item.resultState!=0" class="nodata">
+                            <p class="zz_p">
+                                <img src="/img/img_wuxiao@2x.png" class="img_img" ng-if="item.resultState == 1000 || item.resultState == 1005">
+                                <img src="/img/icon_huoquzhong@2x.gif" class="img_img" ng-if="item.resultState == 1">
+                            </p>
+                            <p class="ti_shib" ng-if="item.resultState == 1000 || item.resultState == 1005">{{'gz_wuygq' | translate }}</p>
+                            <p class="ti_shib" ng-if="item.resultState == 1">{{'gz_sjhzhqz' | translate }}</p>
+                        </dd>
+                        <!--箱跟踪-->
+                        <!-- 正常 -->
+                        <div class="content" ng-if="item.datatype==0 && (item.traceState == 1 || item.traceState == 2 || item.traceState == 3 || item.traceState == 4)">
+                            <!-- ATA和ATD不为空 先显示ATA和ATD     -->
+                            <div class="content_main">
+                                <p class="main_p">
+                                    <span class="cirle"></span>
+                                    <span class="etdEta" ng-if="item.dlpttime">ATD:{{GetTimeDay(item.dlpttime)}}</span>
+                                    <span class="etdEta" ng-if="item.dlpttime==null || item.dlpttime==''">ETD:{{GetTimeDay(item.etd)}}</span>
+                                    <span class="gangk">{{item.pol.length>13?item.pol.toUpperCase().substr(0,12)+"...":item.pol.toUpperCase()}}</span>
+                                </p>
+                                <p class="main_p">
+                                    <span class="cirle"></span>
+                                    <span class="etdEta" ng-if="item.dschtime">ATA:{{GetTimeDay(item.dschtime)}}</span>
+                                    <span class="etdEta" ng-if="item.dschtime==null || item.dschtime==''">ETA:{{GetTimeDay(item.eta)}}</span>
+                                    <span class="gangk">{{item.dtp.length>13?item.dtp.toUpperCase().substr(0,12)+"...":item.dtp.toUpperCase()}}</span>
+                                </p>
+                                <p class="content_fixed">
+                                    <span class="main">{{item.currentnode|currentNode}}</span>
+                                    <i class="new" ng-if="item.updateMark==1"></i>
+                                    <i class="icon_trackList"></i>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- 异常 -->
+                        <dd ng-if="item.datatype==0 && item.traceState == 5" class="nodata">
+                            <p class="zz_p">
+                                <img src="/img/img_wuxiao@2x.png" class="img_img">
+                            </p>
+                            <p class="ti_shib">{{'gz_wuygq' | translate }}</p>
+                        </dd>
+                        <!-- 查询中 -->
+                        <dd ng-if="item.datatype==0 && item.traceState == 6" class="nodata">
+                            <p class="zz_p">
+                                <img src="/img/icon_huoquzhong@2x.gif" class="img_img">
+                            </p>
+                            <p class="ti_shib">{{'gz_sjhzhqz' | translate }}</p>
+                        </dd>
+                        <div class="c"></div>
+                    </dl>
+                </ion-scroll>
+            </div>
+        </div>
+
+        <!-- 未登录 -->
+        <div id="tj">
+            <div class="statusBarStyle"></div>
+            <div class="gen_bar"> <p class="title_p">{{'sjgz_wdgz' | translate }}</p><i class="icon_trackLogo"></i></div>
+            <div class="gen_content">
+                <div class="content_title">
+                    <h1 style="display: block;">{{'sjgz_ksty'|translate}}!</h1>
+                    <p>{{'sjgz_gzcbhxhssdt_top'|translate}}</p>
+                    <p>{{'sjgz_gzcbhxhssdt_bottom'|translate}}</p>
+                </div>
+                <div class="add_bar">
+                    <div class="add_but" ng-click="addTrack()" >
+                        <i class="icon_add"></i>
+                        <p class="add_bar_p">{{'sjgz_tjgz'|translate}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="sl">
+                <div class="dt">
+                    <span class="xhgz">{{'sjgz_xhgz'|translate}}</span><span class="shili">{{'sjgz_sl'|translate}}</span>
+                </div>
+                <div ng-click="trackDetail_track()">
+                    <p class="head">
+                        <img src="/img/genzong_wenjian@2x.png" style="width: 10px;height: 13px;">
+                        <span class="head_name">ONEYSH9ET7374500</span>
+                        <span class="head_time">02-17({{'sjcq_Wed'|translate}})</span>
+                    </p>
+                    <div class="content">
+                        <div class="content_main">
+                            <p class="main_p"><span class="cirle"></span><span class="etdEta">ETD:02-17({{'sjcq_Wed'|translate}})</span><span class="gangk">SHANGHAI</span></p>
+                            <p class="main_p"><span class="cirle"></span><span class="etdEta">ETA:03-20({{'sjcq_Fri'|translate}})</span><span class="gangk">HONG KONG</span></p>
+                            <p class="content_fixed"><span class="main">{{'sjgz_tkx'|translate}}</span><i class="icon_trackList"></i></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </ion-content>
+    <div class="jia_bottm" ng-click="addTrack()" id="lb_jh" style="display: none;"></div>
+    <script id="templates/modal.html" type="text/ng-template">
+        <ion-modal-view class='modelKuang' ng-click="quxiaoModel()">
+          <div class="model_list">
+                <div class="model_div" ng-click="delectAll()">删除</div>
+                <!-- <div class="model_border"></div>
+                <div class="model_div" ng-click="warnFun(1,currentUpadte.identify,'List')" ng-if='warnFu0'>{{'sjgz_sjtx'|translate}}</div>
+                <div class="model_div" ng-click="warnFun(0,currentUpadte.identify,'List')" ng-if='warnFu1'>{{'sjgz_qxtx'|translate}}</div> -->
+          </div>      
+        </ion-modal-view>
+      </script>      
+</ion-view>

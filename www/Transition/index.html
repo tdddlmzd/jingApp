@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<title>点击下载应用</title>
+	<style type="text/css">
+  *{margin:0; padding:0;}
+	a{text-decoration: none;}
+	img{max-width: 100%; height: auto;}
+	.weixin-tip{
+    display: none;
+    position: fixed;
+    left:0; top:0;
+    bottom:0;
+    background: rgba(0,0,0,0.8);
+    filter:alpha(opacity=80); 
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+  }
+  .weixin-tip img{
+    width: 217px;
+    height: 97px;
+    position: absolute;
+    top: 10px;
+    right: 30px;
+  }
+  .main{
+    position: relative;
+  }
+  .content{
+    width: 100%;
+    position: absolute;
+    top: 46%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
+  .logo{
+    display: block;
+    width: 77px;
+    height: 77px;
+    margin: 0 auto;
+    margin-bottom: 23px;
+  }
+  h4{
+    margin-bottom: 23px;
+    text-align: center;
+    font-family: "Source Han Sans CN","PingFang-SC-Medium","Microsoft YaHei";
+    font-size: 24px;
+    line-height: 24px;
+    font-weight: bold;
+    color: #282828;
+  }
+  p{
+    margin-bottom: 31px;
+    font-size: 16px;
+    line-height: 16px;
+    color: #909090;
+    text-align: center;
+  }
+  .btn{
+    width: 313px;
+    height: 48px;
+    background-color: #0983f8;
+    border-radius: 24px;
+    font-size: 16px;
+    line-height: 48px;
+    color: #ffffff;
+    text-align: center;
+    margin: 0 auto;
+    text-decoration: none;
+    display: block;
+  }
+  .btn.activated{
+    background-color: #0769c6;
+  }
+	</style>
+</head>
+<body>
+  <div class="main">
+    <div class="content">
+      <img class="logo" src="img/logo.png">
+      <h4>爱鲸准</h4>
+      <p>船期 跟踪，就是鲸准 !</p>
+      <a class="btn" href="https://jingzhun.s3.cn-northwest-1.amazonaws.com.cn/app/app-release.apk">下载爱鲸准客户端</a>
+    </div>
+  </div>
+	<div class="weixin-tip">
+		<img src="img/live_weixin.png" alt="微信打开"/>
+	</div>
+	<script type="text/javascript">
+        $(window).on("load",function(){
+          var winHeight = $(window).height();
+          $(".main").css("height",winHeight);
+          function is_weixin() {
+              var ua = navigator.userAgent.toLowerCase();
+              if (ua.match(/MicroMessenger/i) == "micromessenger") {
+                  return true;
+              } else {
+                  return false;
+              }
+          }
+          var isWeixin = is_weixin();
+          if(isWeixin){
+            $(".weixin-tip").css("height",winHeight);
+                  $(".weixin-tip").show();
+          }
+        })
+	</script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<ion-view view-title="" ng-init="initDetail()" hide-nav-bar="true">
+    <!-- <ion-nav-buttons side="left">
+        <a ng-click="doYourStuff()" class="button button-icon icon ion-ios-arrow-back" nav-direction="back"></a>
+    </ion-nav-buttons> -->
+    <ion-content overflow-scroll="true" style="overflow: hidden;background-color: #fff;">
+        <!-- 地图组件  因请求过慢所以设置一个过渡地图-->
+        <div id="map_track" class="sp-map" ng-style="mapHeight">
+        </div>
+        <div ng-click="goBack()" class="mapButton"></div>
+        <div class="tab_bar" style="display: block;" ng-style="topHeight" id="track_detial">
+            <h1 on-drag="onDrag($event);" on-release="onRelease()" on-touch="onTouch()" style="height:26px;background-color: #FFFFFF;" class="tab_h1"></h1>
+            <div on-swipe="DetailIdDrag($event)" style="display: block;overflow: hidden;background-color: #FFFFFF;" id="overflowDiv">
+                <!-- <div class="shippings" ng-if="trackDetail.objterminalop!=null">
+                    <h2><i class="text-icons icon-stit" style="background-image: url({{shipLogoUrl}}{{trackDetail.scac}}2.png);"></i>{{trackDetail.vslname}}/ {{trackDetail.voy}}</h2>
+
+                    <dl ng-if="trackDetail.objterminalop.ata!=''&&trackDetail.objterminalop.atd!=''&&trackDetail.objterminalop.ata!=null&&trackDetail.objterminalop.atd!=null">
+                        <dd><a>{{polItem}}</a><em>ATD {{trackDetail.objterminalop.atd| Time:'MM-dd'}}</em></dd>
+                        <dt><b>{{iDays}}{{'sjgz_t'|translate}}</b> <b>&nbsp;</b> </dt>
+                        <dd class="fr"><a>{{dtpItem}}</a><em>ATA {{trackDetail.objterminalop.ata| Time:'MM-dd'}}</em></dd>
+                    </dl>
+
+                    <dl>
+                        <dd><a>{{polItem}}</a><em>ETD {{trackDetail.etd| Time:'MM-dd'}}</em></dd>
+                        <dt><b>{{iDays}}{{'sjgz_t'|translate}}</b> <b>&nbsp;</b> </dt>
+                        <dd class="fr"><a>{{dtpItem}}</a><em>ETA {{trackDetail.eta| Time:'MM-dd'}}</em></dd>
+                    </dl>
+                </div> -->
+                <div class="shippings">
+                    <!-- <h1 on-drag-down="onDragDown()" on-drag-up="onDragUp()" style="height:20px;"></h1> -->
+                    <!-- <h2><i class="text-icons icon-stit" style="background-image: url({{shipLogoUrl}}{{trackDetail.scac}}2.png);"></i>{{trackDetail.vslname}}/ {{trackDetail.voy}}</h2> -->
+                    <!-- <dl>
+                        <dd>
+                            <a>{{polItem.toUpperCase()==""?"&nbsp":polItem.toUpperCase()}}</a>
+                            <em>ETD {{trackDetail.etd| Time:'MM-dd'}}</em>
+                        </dd>
+                        <dt>
+                            <b>{{iDays}}{{'sjgz_t'|translate}}</b> 
+                            <b>&nbsp;</b> 
+                        </dt>
+                        <dd class="fr">
+                            <a>{{dtpItem.toUpperCase()==""?"&nbsp":dtpItem.toUpperCase()}}</a>
+                            <em>ETA {{trackDetail.eta| Time:'MM-dd'}}</em>
+                        </dd>
+                    </dl> -->
+                    <div class="carton">
+                        <p class="blno">{{trackDetail.referenceno ? trackDetail.referenceno.toUpperCase() : ''}}</p>
+                        <p class="blnostate">{{trackDetail.currentnode|currentNode}}</p>
+                    </div>
+                    <div class="popdinfor">
+                        <div class="start">
+                            <p class="polpod">{{polItem.toUpperCase()==""?"&nbsp":polItem.toUpperCase()}}</p>
+                            <p ng-if="getCurrentIndex(trackDetail.currentnode) > 11" class="etdeta">
+                                <span ng-if="trackDetail.dlpttime">ATD: {{GetTimeDay(trackDetail.dlpttime)}}</span>
+                                <span ng-if="!trackDetail.dlpttime">--</span>
+                            </p>
+                            <p ng-if="getCurrentIndex(trackDetail.currentnode) <= 11" class="etdeta">
+                                <span ng-if="trackDetail.etd">ETD: {{GetTimeDay(trackDetail.etd)}}</span>
+                                <span ng-if="!trackDetail.etd">--</span>
+                            </p>
+                        </div>
+                        <div class="center">
+                            <p class="center_jain" ng-class="{true : '',false : 'transparent'}[iDays !== '']">{{iDays}}{{'sjgz_t'|translate}}</p>
+                            <p class="image"></p>
+                            <p ng-if="trackDetail.isEnter=='0'" class="isTransit">{{'sjcq_zd' | translate }}</p>
+                            <p ng-if="trackDetail.isEnter=='1'" class="isTransit">{{'sjcq_zz' | translate }}</p>
+                        </div>
+                        <div class="end">
+                            <p class="polpod">{{dtpItem.toUpperCase()==""?"&nbsp":dtpItem.toUpperCase()}}</p>
+                            <p ng-if="getCurrentIndex(trackDetail.currentnode) > 16" class="etdeta">
+                                <span ng-if="trackDetail.dschtime">ATA: {{GetTimeDay(trackDetail.dschtime)}}</span>
+                                <span ng-if="!trackDetail.dschtime">--</span>
+                            </p>
+                            <p ng-if="getCurrentIndex(trackDetail.currentnode) <= 16" class="etdeta">
+                                <span ng-if="trackDetail.eta">ETA: {{GetTimeDay(trackDetail.eta)}}</span>
+                                <span ng-if="!trackDetail.eta">--</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="port_list">
+                    <div class="chuan_infor">
+                        <p ng-if="lan=='zh-cn'">
+                            <span ng-if="trackDetail.objterminalop">{{trackDetail.polname}}{{'sjcq_mtcz'|translate}}{{'【' + trackDetail.objterminalop.terminal + '】'}}</span>
+                            <span ng-if="!trackDetail.objterminalop">{{trackDetail.polname}}{{'sjcq_mtcz'|translate}}{{'【--】'}}</span>
+                        </p>
+                        <p ng-if="lan=='us-en'">
+                            <span ng-if="trackDetail.objterminalop">{{trackDetail.pol}}{{'sjcq_mtcz'|translate}}{{'【' + trackDetail.objterminalop.terminal + '】'}}</span>
+                            <span ng-if="!trackDetail.objterminalop">{{trackDetail.pol}}{{'sjcq_mtcz'|translate}}{{'【--】'}}</span>
+                        </p>
+                    </div>
+                    <ul class="mat_ul">
+                        <li class="mat_li">
+                            <p class="mat_name">{{'sjcq_kgsj'|translate}}</p>
+                            <p class="mat_time">{{GetDay_Time(trackDetail.objterminalop.cyopentime)}}</p>
+                        </li>
+                        <li class="mat_li">
+                            <p class="mat_name">{{'sjcq_jgangsj'|translate}}</p>
+                            <p class="mat_time">{{GetDay_Time(trackDetail.objterminalop.cyclosetime)}}</p>
+                        </li>
+                        <li class="mat_li">
+                            <p class="mat_name">{{'sjcq_jhkb'|translate}}</p>
+                            <p class="mat_time">{{GetDay_Time(trackDetail.objterminalop.eta)}}</p>
+                        </li>
+                        <li class="mat_li">
+                            <p class="mat_name">{{'sjcq_sjkb'|translate}}</p>
+                            <p class="mat_time">{{GetDay_Time(trackDetail.objterminalop.ata)}}</p>
+                        </li>
+                        <li class="mat_li">
+                            <p class="mat_name">{{'sjcq_jhlb'|translate}}</p>
+                            <p class="mat_time">{{GetDay_Time(trackDetail.objterminalop.etd)}}</p>
+                        </li>
+                        <li class="mat_li">
+                            <p class="mat_name">{{'sjcq_sjlb'|translate}}</p>
+                            <p class="mat_time">{{GetDay_Time(trackDetail.objterminalop.atd)}}</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="h_list" ng-repeat="item in trackDetail.lstlinertrackingctnrinfo track by $index">
+                    <div class="h_tit">
+                        <em ng-repeat="itemlstctnrbaseinfos in trackDetail.lstctnrbaseinfos track by $index" ng-if="itemlstctnrbaseinfos.ctnrno==item.ctnrno">
+                            {{itemlstctnrbaseinfos.ctnrno}}&nbsp;&nbsp;{{itemlstctnrbaseinfos.csize}}{{itemlstctnrbaseinfos.ctype}}
+                        </em>
+                        <span style="color: #ff7676;font-weight: bold;">{{item.latestNode|currentNode}}</span>
+                        <span class="more1" ng-click="moreFun($event,$index)" style="display:none;" ></span>
+                        <span class="close1" ng-click="closeFun($event,$index)"></span>
+                    </div>
+                    <ul class="gz_box">
+                        <li ng-repeat="bignode in item.portList track by $index" ng-class="statuNodeActive('timeLine', item.latestNodeIndex, bignode)">
+                            <h1 class="ng-tit">
+                                <p ng-if="bignode.nameCn == '提空箱' || bignode.nameCn == '还空箱'" ng-class="{true : 'lan_tit_yuan',false : 'hui_tit_yuan' }[bignode.color]" class="bigNode"></p>
+                                <p ng-if="bignode.nameCn !== '提空箱' && bignode.nameCn !== '还空箱'" ng-class="{true : 'lan_tit_fang',false : 'hui_tit_fang' }[bignode.color]" class="bigNode"></p>
+                                <div ng-if="lan=='zh-cn'">
+                                    <p class="tesBigNode"  ng-if="bignode.nameCn == '提空箱' || bignode.nameCn == '还空箱'" ng-class="{true : 'hei_size',false : 'hui_size' }[bignode.color]">{{bignode.nameCn}}</p>
+                                    <p class="tit_nameCn"  ng-if="bignode.nameCn !== '提空箱' && bignode.nameCn !== '还空箱'" ng-class="{true : 'hei_size',false : 'hui_size' }[bignode.color]">{{bignode.nameCn}}</p>
+                                </div>
+                                <div ng-if="lan=='us-en'">
+                                    <p class="tesBigNode"  ng-if="bignode.nameCn == '提空箱' || bignode.nameCn == '还空箱'" ng-class="{true : 'hei_size',false : 'hui_size' }[bignode.color]">{{bignode.nameEn}}</p>
+                                    <p class="tit_nameCn"  ng-if="bignode.nameCn !== '提空箱' && bignode.nameCn !== '还空箱'" ng-class="{true : 'hei_size',false : 'hui_size' }[bignode.color]">{{bignode.nameEn}}</p>
+                                </div>
+                                <p class="nameCn_time" ng-if="bignode.nameCn == '提空箱' || bignode.nameCn == '还空箱'" ng-class="{true : 'hei_size',false : 'hui_size' }[bignode.color]">{{box_Time(bignode.statustime,bignode.color,bignode.nameCn)}}</p>
+                            </h1>
+                            <div ng-repeat="smallnode in bignode.statuNode track by $index" class="ng_div">
+                                <span ng-class="{true : 'no',false : 'yes' }[smallnode.statuNodeIndex > item.latestNodeIndex]" class="yuan_node"></span>
+                                <span class="node" ng-class="{true : 'hui_size',false : 'hei_size' }[smallnode.statuNodeIndex > item.latestNodeIndex]">{{smallnode.statuscd|currentNode_detail}}</span>
+                                <span class="time" ng-class="{true : 'hui_size',false : 'hei_size' }[smallnode.statuNodeIndex > item.latestNodeIndex]">{{box_Time(smallnode.statustime,smallnode.isest,smallnode.nameCn)}}</span>
+                            </div>
+                            <div ng-if="bignode.vesselInfo" class="vessel_ul">
+                                <div class="vessel_li">
+                                    <p class="vessel_li_name">{{'cq_cm'|translate}}</p>
+                                    <p class="vessel_li_span">{{bignode.vesselInfo.vessel}}</p>
+                                </div>
+                                <div class="vessel_li">
+                                    <p class="vessel_li_name">{{'cq_hc'|translate}}</p>
+                                    <p class="vessel_li_span">{{bignode.vesselInfo.voy}}</p>
+                                </div>
+                                <div class="vessel_li">
+                                    <p class="vessel_li_name">{{'sjcq_hxdm'|translate}}</p>
+                                    <p class="vessel_li_span">{{bignode.vesselInfo.routeCode}}</p>
+                                </div>
+                            </div>
+                            <div class="wayPort" ng-if="trackDetail.railwayPlaceList !== undefined && trackDetail.railwayPlaceList !== null  && trackDetail.railwayPlaceList.length !== 0 && bignode.isViaWayShow"">
+                                <div  class="wayPortLable" ng-class="{true : 'hei_size',false : 'hui_size' }[bignode.isViaWayColor]">
+                                    {{'gzjd_tjd'|translate}}{{"(" + trackDetail.railwayPlaceList.length  + ")"}}
+                                </div>
+                                <div class="port_ul">
+                                    <div class="port_li" ng-repeat="railw in trackDetail.railwayPlaceList track by $index">
+                                        <p ng-class="{true : 'lanyuan',false : 'huiyuan' }[bignode.isViaWayColor]"></p>
+                                        <p class="text" ng-class="{true : 'hei_size',false : 'hui_size' }[bignode.isViaWayColor]"> {{railw}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 未亮的图标 -->
+                            <img src="../img/icon_ditu_huichuan@2x.png" class="imageChuan" ng-if="bignode.color !== true && bignode.icon == '1'">
+                            <img src="../img/icon_ditu_huitielu@2x.png" class="imageRailway" ng-if="bignode.color !== true && bignode.icon == '3'">
+                            <img src="../img/icon_ditu_huiche@2x.png" class="imageChe" ng-if="bignode.color !== true && bignode.icon == '4'">
+
+                            <!-- 亮的图标 -->
+                            <img src="../img/genzong_chuanbo@2x.png" class="imageChuan" ng-class="statuNodeActive('image', item.latestNodeIndex, bignode)" ng-if="bignode.color == true && bignode.icon == '1'">
+                            <img src="../img/icon_ditu_tielu@2x.png" class="imageRailway" ng-class="statuNodeActive('image', item.latestNodeIndex, bignode)" ng-if="bignode.color == true && bignode.icon == '3'">
+                            <img src="../img/icon_ditu_huoche@2x.png" class="imageChe" ng-class="statuNodeActive('image', item.latestNodeIndex, bignode)" ng-if="bignode.color == true && bignode.icon == '4'">
+
+                        </li>
+                        <!-- 提空箱状态 -->
+                        <!-- <li ng-if="item.tkData_isShow">
+                            <h1 class="ng-tit">
+                                <i></i>{{trackDetail.pol}}
+                            </h1>
+                            <div>
+                                <i class="icon-land"></i></i><i ng-class="{true : 'no',false : 'yes' }[item.tkData.isest=='Y']"></i>
+                                <b>{{item.tkData.statuscd|currentNode_detail}}</b><em>{{item.tkData.statustime|Time:'MM-dd HH:mm'}}</em>
+                            </div>
+                        </li> -->
+                        <!-- 起运港状态 -->
+                        <!-- <li ng-repeat="qygData in item.qygData track by $index">
+                            <h1 ng-if="$index==0" class="ng-tit">
+                                <i ng-class="{true : 'kong',false : ''}[item.qygdayuan]"></i>{{trackDetail.pol}}
+                            </h1>
+                            <div>
+                                <i class="icon-ships" ng-class="{true : 'icon-ships',false : 'icon-no'}[$index==item.qygData.length-1]"></i><i ng-class="{true : 'no',false : 'yes' }[qygData.isest=='Y']"></i>
+                                <b>{{qygData.statuscd | currentNode_detail}}</b><em>{{qygData.statustime|Time:'MM-dd HH:mm'}}</em>
+                            </div>
+                        </li> -->
+                        <!-- 起运港》船数据 -->
+                        <!-- <li ng-repeat="vesselList in trackDetail.vesselList track by $index" ng-if="vesselList.pol == trackDetail.pol">
+                            <ul style="display: block;">
+                                <li>{{'cq_cm'|translate}}<span>{{vesselList.vslname}}</span></li>
+                                <li>{{'cq_hc'|translate}}<span>{{vesselList.voy}}</span></li>
+                                <li>{{'sjcq_hxdm'|translate}}<span>{{vesselList.vesselInfo.routeCode}}</span></li>
+                            </ul>
+                        </li> -->
+                        <!-- 起运港》途径港数据 -->
+                        <!-- <li ng-repeat="vesselList in trackDetail.vesselList track by $index" ng-if="vesselList.pol == trackDetail.pol && vesselList.docking.length>0">
+                            <h1><i></i>{{'sjcq_tjgk'|translate}}</h1>
+                            <div ng-repeat="docking in vesselList.docking track by $index">
+                                <i class="icon-no"></i><i class="yes"></i>{{vesselList.docking}}
+                            </div>
+                        </li> -->
+                        <!-- 中装港状态 -->
+                        <!-- <li ng-repeat="entrePortList  in trackDetail.entrePortList track by $index">
+                            <div style="display: block;" ng-repeat="zzgData in item.zzgData track by $index" ng-if="entrePortList.entrePort.indexOf(zzgData.statusplace)>-1||zzgData.statusplace.indexOf(entrePortList.entrePort)>-1">
+                                <h1 ng-if="$index==0" class="ng-tit">
+                                    <i ng-class="{true : 'kong',false : ''}[item.zzgdayuan]"></i>{{zzgData.statusplace}}
+                                </h1>
+                                <div>
+                                    <i class="icon-no"></i><i ng-class="{true : 'no',false : 'yes' }[zzgData.isest=='Y']"></i>
+                                    <b>{{zzgData.statuscd | currentNode_detail}}</b><em>{{zzgData.statustime|Time:'MM-dd HH:mm'}}</em>
+                                </div>
+                            </div>
+                        </li> -->
+                        <!-- 中装港》船数据 -->
+                        <!-- <li ng-repeat="entrePortList in trackDetail.entrePortList track by $index">
+                            <ul style="display:block;" ng-repeat="vesselList in trackDetail.vesselList track by $index" ng-if="entrePortList.entrePort.indexOf(vesselList.pol)>-1||vesselList.pol.indexOf(entrePortList.entrePort)>-1">
+                                <li>{{'cq_cm'|translate}}<span>{{vesselList.vslname}}</span></li>
+                                <li>{{'cq_hc'|translate}}<span>{{vesselList.voy}}</span></li>
+                                <li>{{'sjcq_hxdm'|translate}}<span>{{vesselList.vesselInfo.routeCode}}</span></li>
+                            </ul>
+                        </li> -->
+                        <!-- 中装港》途径港数据 -->
+                        <!-- <li ng-repeat="entrePortList in trackDetail.entrePortList track by $index">
+                            <div style="display:block;" ng-repeat="vesselList in trackDetail.vesselList track by $index" ng-if="entrePortList.statusplace.indexof(vesselList.pol)">
+                                <h1><i></i>{{'sjcq_tjgk'|translate}}</h1>
+                                <div ng-repeat="docking in vesselList.docking track by $index">
+                                    <i class="icon-no"></i><i class="yes"></i>{{docking}}
+                                </div>
+                            </div>
+                        </li> -->
+                        <!-- 目的港 -->
+                        <!-- <li ng-repeat="mdgData in item.mdgData track by $index" ng-if="item.mdgData.length>0" class="last">
+                            <h1 ng-if="$index==0" class="ng-tit">
+                                <i ng-class="{true : 'kong',false : ''}[item.mdgdayuan]"></i>{{trackDetail.dtp}}
+                            </h1>
+                            <div>
+                                <i class="icon-no"></i><i ng-class="{true : 'no',false : 'yes' }[mdgData.isest=='Y']"></i>
+                                <b>{{mdgData.statuscd | currentNode_detail}}</b><em>{{mdgData.statustime|Time:'MM-dd HH:mm'}}</em>
+                            </div>
+                        </li> -->
+                        <!-- 目的港下节点状态为空时显示 -->
+                        <!-- <li ng-if="item.mdgData.length==0" class="last">
+                            <h1 class="ng-tit">
+                                <i class="kong"></i>{{trackDetail.dtp}}
+                            </h1>                        
+                        </li> -->
+                        <!-- <div class="c"></div> -->
+                    </ul>
+                </div>
+                <div class="h_list_zw" style="height: 35px;background: none;"> 
+                </div>
+               
+
+            </div>
+        </div>
+       
+    </ion-content>
+    <ul class="bootms" style="height: auto;border-top: none;">
+        <div class="but_bar1">
+            <!-- 以前的class名 -->
+            <a ng-click="openQQ()" class="sail_but_esc">{{'sjgz_tjcwfk'|translate}}</a>
+            <!-- 提醒 -->
+            <!-- <a ng-click="warnFun(1,trackDetail.identify,'Detail')" class="track_but_up" ng-if='warnFu0'>{{'sjgz_sjtx'|translate}}</a> -->
+
+            <!-- 已提醒 -->
+            <!-- <a ng-click="warnFun(0,trackDetail.identify,'Detail')" class="track_but_up" ng-if='warnFu1'>{{'sjgz_ytx'|translate}}</a> -->
+        </div>
+    </ul>
+</ion-view>

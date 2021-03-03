@@ -1,0 +1,34 @@
+<!-- 
+    测试：路由器配置，ng语法等使用 
+    杨卿林
+    2020-03-02
+-->
+<ion-view style="text-align:left;" view-title="列表页" ng-init="init()" hide-tabs="true">
+    <ion-content>
+      <ion-list>
+
+        <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="item in tasks" type="item-text-wrap" ng-click='clickVipFunction(item)' ng-if="item.type=='vip'">
+          <h2>{{item.title+item.type}}</h2>      
+          <i class="icon ion-chevron-right icon-accessory"></i>
+        </ion-item>
+
+        <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="item in tasks" type="item-text-wrap" href="#/tab/yang/{{item.id}}" ng-if="item.type!='vip'">
+            <h2>{{item.title}}</h2>      
+            <i class="icon ion-chevron-right icon-accessory"></i>
+          </ion-item>
+
+          <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="item in tasks" type="item-text-wrap" href="#/tab/yang/{{item.id}}" ng-if="item.type!='vip'">
+            <h2>{{'sjcq_cq' | translate }}</h2>      
+            <i class="icon ion-chevron-right icon-accessory"></i>
+          </ion-item>
+
+          <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="item in tasks" type="item-text-wrap" ng-click='clickFunction(item.id)' ng-if="item.type!='vip'">
+            222<h2 ng-bind="'sjcq_cq'|translate"></h2>      
+            <i class="icon ion-chevron-right icon-accessory"></i>
+          </ion-item>
+
+      </ion-list>
+    </ion-content>
+
+
+  </ion-view>

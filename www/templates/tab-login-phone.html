@@ -1,0 +1,38 @@
+<ion-view view-title="" hide-back-button="false"><!-- 手机验证码登录————输入手机号页面-->
+    <!-- <ion-nav-bar class="bar-stable">
+        <ion-nav-back-button></ion-nav-back-button>
+    </ion-nav-bar> -->
+    <ion-content style="background: #072c4c;" scroll="false" padiing="true">
+        <!-- <div class="statusBarStyle"></div>
+        <div class="navigation">
+            <p class="navP" ng-click="goBack()"></p>
+        </div> -->
+        <div class="login_title">{{'dlzc_yzmdl' | translate }}<!-- 手机验证码登录--></div>
+        <div ng-controller="loginController" class="login_content">
+            <div class="login_title2">{{'dlzc_qsrndsjhm'| translate}}<!-- 请输入您的手机号码-->
+            </div>
+            <div class="login">
+                <form>
+                    <div class="inputzone">
+                        <label class="sele_bar"><i class="text-icon login_icon-down"></i>
+                            <input type="text" id="singlePicker_login_dummy" style="border: none;background-color: #fff" readonly="readonly" placeholder="" />
+                            <select id="singlePicker_login">
+                                <option value="86">+86</option>
+                                <option value="92">+92</option>
+                            </select>
+                        </label>
+                        <input style="margin-left: 5px; z-index: 1000;padding: 0;" type="text" name="user_login" placeholder="{{'dlzc_qsrsjhm'| translate}}" ng-model="model.phone">
+                        <a class="fr" ng-click="cancel()"><i class="text-icon icon-close"></i></a>
+                    </div>
+                    <button type="submit" class="btn btn-primary" ng-click="getcode(1)">{{'dlzc_fsyzm'| translate}}<!-- 获取验证码--></button>
+                </form>
+                <div class="other-operation"><span class="fr"><a href="#/tab/forgetpassword/forgetpasswordphone">{{'dlzc_wjmm'| translate}}<!-- 忘记密码？--></a></span><a href="#/tab/login" class="fl">{{'dlzc_zhmidl'| translate}}<!-- 账号密码登录--></a>
+                    <div class="c"></div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+    <div class="other">
+        <p>{{'dlzc_hmyzh'| translate}}<a href="#/tab/register/registerphone">{{'dlzc_ljzc'| translate}}<!-- 立即注册--></a></p>
+    </div>
+</ion-view>

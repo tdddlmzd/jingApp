@@ -1,0 +1,87 @@
+<ion-view view-title="" can-swipe-back=”false” hide-back-button="false"><!-- 个人信息页面 -->
+    <!-- <ion-nav-bar class="bar-stable">
+        <ion-nav-back-button></ion-nav-back-button>
+    </ion-nav-bar> -->
+    <ion-content has-bouncing="false">
+        <div ng-controller="myController" ng-init="detailinit()">
+            <!-- <div class="statusBarStyle"></div>
+            <div class="navigation">
+                <p class="navP" ng-click="goBackMy()"></p>
+            </div>       -->
+            <div class="my_bar"> <p class="title_p">{{'sjqty_grxx' | translate }}</p></div>
+            <ul class="mylist">
+                <li ng-click="getPermissions_2()"> 
+                    <div class='flex_div'>
+                        <span class='left_infor'>{{'sjqty_tx' | translate}}</span>
+                        <!-- <input type="file" id="fileup" /> -->
+                        <!--头像-->
+                        <span class='image_infor'><img id="imageId" src="img/user.png" class="user_pic_s"></span>
+                        <i class="text-icon icon-fr"></i>
+                    </div>
+                </li>
+                <li ng-click="edit(1)">
+                    <div class='flex_div'>
+                        <span class='left_infor'>{{'sjqty_nc' | translate}}</span>
+                        <!--昵称-->
+                        <span class='right_infor'>{{model.Namenc}}</span>
+                        <i class="text-icon icon-fr"></i>
+                    </div>
+                </li>
+                <li style="margin-bottom: 8px;">
+                    <div class='flex_div nobottom'>
+                        <span class='left_infor'>{{'sjqty_xb' | translate}}</span>
+                        <div id="radio_l" class="sf-checked" type="radio">
+                            <div class="sf-checked-item" value='0' id="man" ng-click="changeman(0)">{{'dlzc_sexnr'| translate}}</div>
+                            <div class="sf-checked-item" value='1' id="woman" ng-click="changewoman(1)">{{'dlzc_sexvr'| translate}}</div>
+                            <div class="c"></div>
+                        </div>
+                    </div>
+                </li>
+                <li ng-click="edit(3)">
+                    <div class='flex_div'>
+                        <span class='left_infor'>{{'sjqty_zw' | translate}}</span>
+                        <!--职务-->
+                        <span class='right_infor'>{{model.Position}}</span>
+                        <i class="text-icon icon-fr"></i>
+                    </div>
+                </li>
+                <li ng-click="edit(4)" style="margin-bottom: 8px;">
+                    <div class='flex_div nobottom'>
+                        <span class='left_infor'>{{'sjqty_ssgs' | translate}}</span>
+                        <!--所属公司-->
+                        <span id="companystr" class='right_infor'>{{model.Company}}</span>
+                        <i class="text-icon icon-fr"></i>
+                    </div>
+                </li>
+                <li ng-click="edit(5)"> 
+                    <div class='flex_div'>
+                        <span class='left_infor'>{{'sjqty_sj' | translate}}</span>
+                        <!--手机-->
+                        <span class='right_infor'>{{model.Phone}}</span>
+                        <i class="text-icon icon-fr"></i>
+                    </div>
+                </li>
+                <li ng-click="edit(6)">
+                    <div class='flex_div'>
+                        <span class='left_infor'>{{'sjqty_zj' | translate}}</span>
+                        <!--座机-->
+                        <span class='right_infor'>{{model.Tel}}</span>
+                        <i class="text-icon icon-fr"></i>
+                    </div>
+                </li>
+                <li ng-click="edit(7)" style="margin-bottom: 8px;">
+                    <div class='flex_div nobottom'>
+                        <span class='left_infor'>{{'sjqty_yx' | translate}}</span>
+                        <!--邮箱-->
+                        <span id="emailstr" class='right_infor'>{{model.Email}}</span>
+                        <i class="text-icon icon-fr"></i>
+                    </div>
+                </li>
+            </ul>
+            <ul class="bottom_mylist">
+                <!-- <button ng-click="upimge()">上传</button> -->
+                <li> <p ng-click="out()" class="quit">{{'sjqty_tcdl' | translate}}<!--退出登陆--></p></li>
+            </ul>
+        </div>
+    </ion-content>
+</ion-view>

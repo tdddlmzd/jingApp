@@ -1,0 +1,30 @@
+<ion-view view-title="" can-swipe-back=”false” hide-back-button="false"><!-- 关于页面 -->
+    <ion-content has-bouncing="false">
+        <div ng-controller="myController" ng-init="aboutinit()">
+            <div class="my_bar"> <p class="title_p">{{'sjqty_gy' | translate }}</p></div>
+            <ul class="mylist">
+                <!--版本号-->
+                <li> 
+                    <div class='flex_div'>
+                        <span class='left_infor'>{{'sjqty_bbh' | translate}}</span>
+                        <span class='tes_infor'>{{versionCode}}</span>
+                    </div>
+                </li>
+                <!--服务协议-->
+                <li ng-click="agreement(1)">
+                    <div class='flex_div'>
+                        <span class='left_infor'>{{'sjqty_fwxy' | translate}}</span>
+                        <i class="text-icon icon-fr"></i>
+                    </div>
+                </li>
+                <!--隐私协议-->
+                <li ng-click="agreement(2)" style="margin-bottom: 8px;">
+                    <div class='flex_div nobottom'>
+                        <span class='left_infor'>{{'sjqty_ysxy' | translate}}</span>
+                        <i class="text-icon icon-fr"></i>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </ion-content>
+</ion-view>

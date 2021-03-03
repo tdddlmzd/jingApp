@@ -1,0 +1,69 @@
+<ion-view view-title="" hide-back-button="true" hide-nav-bar="true">
+    <!-- <ion-nav-bar>
+        <ion-nav-back-button></ion-nav-back-button>
+    </ion-nav-bar> -->
+    <ion-content has-bouncing="false">
+        <div ng-init="init()" style="background-color:#f3f3f3;" ontouchstart>
+            <div class="statusBarStyle"></div>
+            <div class="ship_bar"> <p class="title_p">{{'sjcq_cq' | translate }}</p><i class="icon_logo"></i></div>
+            <form>
+                <ul class="so_bar">
+                    <li class="inputzone">
+                        <!-- <i class="text-icon icon-pora"></i> -->
+                        <p class="cq-qimu">{{'sjcq_qis' | translate }}</p>
+                        <input type="text" name="" placeholder="{{'sjcq_qxzqyg' | translate }}" ng-model="model.polAndPolEN" on-touch="startportSearch()" readonly="readonly" style="background: #FFFFFF;">
+                        <i on-touch="startportSearch()" class="text-icon icon-down"></i>
+                    </li>
+                    <li class="inputzone"> 
+                        <!-- <i class="text-icon icon-porb"></i> -->
+                        <p class="cq-qimu">{{'sjcq_mud' | translate }}</p>
+                        <input type="text" name="" placeholder="{{'sjcq_qxzmdg' | translate }}" ng-model="model.podAndPodEN" on-touch="endportSearch()" readonly="readonly" style="background: #FFFFFF;">
+                        <i on-touch="endportSearch()" class="text-icon icon-down"></i>
+                    </li>
+                    <!-- <li class="inputzone">
+                        <div id="radio_s" class="sf-checked" type="radio">
+                            <div class="sf-checked-item" value='1' checked="checked" id="FromPortID" ng-click="fromPortToPortClick('FromPortID')" style="width: 100%;float: none;">
+                                <span class="sf-radio-icon sf-radio-selected"></span>{{'cq_lg' | translate }}</div>
+                            <div class="c"></div>
+                        </div>
+                    </li> -->
+                    <li class="inputzone" id="DateTimePicker">
+                        <!-- <input type="text" name="" placeholder="选择日期" class="seldate"> -->
+                        <!-- 日期控件 -->
+                        <!-- <ion-content class="padding" style="margin-top: -12px;text-align: center;">
+                            <div on-tap="openDatePicker()">
+                                <span style="color:#f75a0e" ng-bind="$parent.validedTime | date:'yyyy-MM-dd'"></span>
+                            </div>
+                        </ion-content>
+
+                        <i class="text-icon icon-down" style="top: 10px;"></i> -->
+                        <p class="cq-qimu">{{'sjcq_riq' | translate }}</p>
+                        <input type="text" class="seldate" id="sailScheduleDateTimePicker" style="background-color: #fff">
+                        <div id="radio_s" class="sf-checked" type="radio">
+                            <div class="sf-checked-item" value='1' checked="checked" id="FromPortID" ng-click="fromPortToPortClick('FromPortID')" style="width: 20%;float: right;">
+                                <span class="sf-radio-icon sf-radio-selected"></span>
+                                {{'cq_lg' | translate }}
+                            </div>
+                            <!-- <div class="sf-checked-item" value='2' id="ToPortID" ng-click="fromPortToPortClick('ToPortID')">
+                                <span class="sf-radio-icon"></span>{{'cq_dg' | translate }}</div> -->
+                            <div class="c"></div>
+                        </div>
+                    </li>
+                    <li class="last">
+                        <div class="but_bar">
+                            <button type="submit" class="btn btn-primary" ng-click="sailScheduleQuery()">{{'cq_cx' | translate }}</button>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+            <ul class="so_list" id="LogShow" ng-if="sailModel.length > 0 && ishistory">
+                <li class="history">{{'sjcq_history' | translate }}</li>
+                <li ng-repeat="item in sailModel.slice().reverse() track by $index">
+                    <p ng-click="select(item.selectValue)">{{item.logValue}}</p>
+                    <i class="home_dele" ng-click="delete($index)"></i>
+                </li>
+            </ul>
+        </div>
+
+    </ion-content>
+</ion-view>

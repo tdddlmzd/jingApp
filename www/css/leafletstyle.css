@@ -1,0 +1,109 @@
+.x-map  {}
+
+.x-map .xship::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    width: 140%;
+    height: 140%;
+    background-color: rgba(49, 63, 170, 0.25);
+    top: -20%;
+    left: -20%;
+    border-radius: 50%;
+    z-index: -1;
+} 
+
+/* 下面是起始港目的港的特殊样式 */
+.PolPod{
+    padding: 3px 8px 3px 8px;
+    background-color: #072c4c;
+    opacity: .7;
+    border-radius: 4px;
+    position: absolute;
+    left: 37px;
+    top: 0px;
+}
+.polPodHe{
+    font-size: 12px;
+    color: #fff;
+    height: 17px;
+    overflow: hidden;
+    font-family: "Source Han Sans CN","PingFang-SC-Medium","Microsoft YaHei" !important;
+}
+.tesBox{
+    color: transparent;
+    user-select: none;
+}
+
+/* 以下是其他样式 */
+.whiteP{
+    padding: 6px 8px 7px 6px;
+    border-radius: 4px;
+    background: rgba(255,255,255,.75);
+    box-shadow: 0 3px 14px rgba(0,0,0,.2);
+    margin-bottom: 10px;
+}
+.titleHe {
+    font-weight: bold;
+    font-size: 12px;
+    color: #072c4c;
+    font-family: "Source Han Sans CN","PingFang-SC-Medium","Microsoft YaHei" !important;
+}
+.textTop{
+    margin-top: 2px;
+    color: #282828;
+    font-family: "Source Han Sans CN","PingFang-SC-Medium","Microsoft YaHei" !important;
+}
+.tag {
+    font-size: 12px;
+    border-radius: 8px;
+    width: 40px;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    /* padding: 1px 5px;
+    margin: 3px auto; */
+    display: inline-block;
+    color: #282828;
+    font-family: "Source Han Sans CN","PingFang-SC-Medium","Microsoft YaHei" !important;
+}
+.tag.primary-tag {
+    background: #072c4c;
+    color: white;
+    font-family: "Source Han Sans CN","PingFang-SC-Medium","Microsoft YaHei" !important;
+}
+.images{
+    width: 18px;
+    height: 15px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -1px;
+}
+
+/* 以下样式为地图组件内部的修改 */
+.leaflet-popup-content-wrapper{
+    border-radius: 4px !important;
+}
+.leaflet-popup-content{
+    margin: 0 !important;
+}
+.leaflet-container a.leaflet-popup-close-button{
+    top: 4px !important;
+    right: 5px !important;
+    font-size: 12px !important;
+    display: none !important;
+}
+.leaflet-popup-content-wrapper, .leaflet-popup-tip{
+    box-shadow: 0 3px 14px rgba(0,0,0,0) !important;
+    background-color: transparent !important;
+}
+.leaflet-bottom{
+    bottom: -18px !important;
+}
+.leaflet-left{
+    display: none !important;
+}
+/* .leaflet-popup  .leaflet-zoom-animated{
+    bottom: 3px;
+} */

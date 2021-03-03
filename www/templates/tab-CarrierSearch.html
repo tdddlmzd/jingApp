@@ -1,0 +1,41 @@
+<ion-view view-title="{{'sjqty_cgsss'|translate}}" hide-back-button="false">
+    <!-- <ion-nav-bar class="bar-stable">
+        <ion-nav-back-button></ion-nav-back-button>
+        <ion-nav-title>{{'sjqty_cgsss'|translate}}</ion-nav-title>
+    </ion-nav-bar> -->
+    <ion-content ng-controller="CarrierSearchController" ng-init="init()" scroll="false" style="touch-action: none;">
+        <!-- <div class="statusBarStyle"></div>
+        <div class="navigation">
+            <p class="navP" ng-click="gotoTop()"></p>
+            <p class="navTille">{{'sjqty_cgsss'|translate}}</p>
+        </div> -->
+        <div class="head_so">
+            <div class="head_p">
+                <i class="icon-so"></i>
+                <input type="text" name="" maxlength="15" ng-model="user.text" ng-model-options="{ debounce: 400 }" ng-keypress="todoSomething($event)" placeholder="{{'sjqty_qxzcgs'|translate}}" ng-change="getCarrier()">
+                <a ng-click="close()">
+                    <i class="icon-close"></i>
+                </a>
+            </div>
+        </div>    
+        <div class="spshow_list">
+            <div class="spshow_list_title">{{'sjqty_tjcgs'|translate}}</div>
+            <div ng-if="carrierList.length>0">
+                <ion-scroll direction="y" scroll-height>
+                    <div class="spshow_list_info" ng-repeat="data in carrierList track by $index" ng-click="selectItem(data)" >
+                        <a >
+                            <!-- <i><img src="{{shipLogoUrl}}{{data.scac}}2.png" width="140"></i> -->
+                            <b >{{data.code}}</b>
+                        </a>
+                        <span ng-if="data.nameScn!=null">{{data.nameScn}}</span>
+                        <span ng-if="data.nameScn==null">{{data.nameCn}}</span>
+                    </div>
+                </ion-scroll>
+            </div>
+        </div>
+        <div ng-if="carrierList.length==0"  style=" margin-top: 1em;text-align: center;font-size: 16px;color: #909090;">
+            {{'sjcq_zwcgs'|translate}}
+        </div>
+        
+    </ion-content>
+</ion-view>

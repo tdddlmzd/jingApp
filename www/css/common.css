@@ -1,0 +1,13 @@
+@charset "utf-8";
+/* CSS Document */
+html{height:100%;min-width:320px;overflow-x:hidden;font-size:100px;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-size-adjust:100%; }
+html *{outline:0;-webkit-tap-highlight-color:transparent}
+article,aside,blockquote,body,button,code,dd,details,div,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}
+body{margin-bottom:80px;color:#282828;/*background-color:#f3f3f3;*/font-family:"Source Han Sans CN","PingFang-SC-Medium","Microsoft YaHei";font-size:14px;line-height:1.4;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;width:100%;}
+input,select,textarea{-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;font-size:100%}
+button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}
+button,input[type=button],input[type=reset],input[type=submit]{cursor:pointer}
+ul,li,dl,dd,dt{list-style-position: inside;	list-style-image: none;	list-style-type: none; margin:0; padding:0;}
+.fr {float: right!important;display:inline-block;}
+.fl {float: left!important; display:inline-block;}
+

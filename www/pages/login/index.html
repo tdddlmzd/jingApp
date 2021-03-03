@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width"
+    />
+    <title>登录</title>
+
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- un-comment this code to enable service worker
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(() => console.log('service worker installed'))
+          .catch(err => console.log('Error', err));
+      }
+    </script>-->
+
+    <!-- <link href="/lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet"> -->
+
+    <link href="/css/common.css" rel="stylesheet" />
+    <link href="/css/base.css" rel="stylesheet" />
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="/lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="/cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="/js/app.js"></script>
+    <script src="/js/angularjs-common.js"></script>
+    <script src="/js/loginController.js"></script>
+    
+    <script src="/js/services.js"></script>
+    <script src="/lib/ionic/js/angular-resource.min.js"></script>
+    <script src="/lib/ionic/js/angular-cookies.min.js"></script>
+    <script src="/lib/ionic/js/jquery-1.11.3.min.js"></script>
+    <script src="/lib/ionic/js/jquery.cookie.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate/2.15.1/angular-translate.js"></script>
+  </head>
+
+  <body ng-app="starter"  ng-controller="loginController">
+    <ion-tabs class="tabs-icon-top tabs-color-active-positive">
+    <!-- <div class="welcome-words">
+        <h1>登陆</h1>
+        <a href="#" class="fl"><i class="text-icon icon-back"></i></a>   <a href="#" class="fr"><i class="text-icon icon-more"></i></a> </div>
+  </div> -->
+    <!-- <div class="title2">请输入账号和密码</div>
+=======
+    <div class="title2">{{ 'login_headtitle' | translate }}</div>
+>>>>>>> .r72904
+    <div class="login">
+      <form>
+        <div class="inputzone">
+          <input
+            type="text"
+            name="user_login"
+            placeholder="{{ 'login_headtitle' | translate }}"
+            ng-model="$parent.userName"
+          />
+        </div>
+        <div class="inputzone">
+          <input
+            type="password"
+            placeholder="请输入密码"
+            ng-model="$parent.passWord"
+            id="passWord"
+          />
+        </div>
+
+        <button type="button" class="btn btn-primary" ng-click="submitLogin()">
+          登录
+        </button>
+
+        <ion-item>
+          <ion-option-button class="button-assertive" ng-click="submitLogin()">登录</ion-option-button>
+        </ion-item>
+      </form>
+      <div class="other-operation">
+        <span class="fr"><a href="#">找回密码</a></span
+        ><a href="#" class="fl">手机验证码登录</a>
+      </div>
+    </div>
+    <div class="other">
+      <p>底部文字信息？<a href="/pages/login/index.html">底部链接文字</a></p>
+    </div> -->
+    <div class="view">
+      <!-- <div class="welcome-words">
+           <h1>登陆</h1>
+           <a href="#" class="fl"><i class="text-icon icon-back"></i></a>   <a href="#" class="fr"><i class="text-icon icon-more"></i></a> </div>
+     </div> -->
+      <div class="title2">请输入账号和密码</div>
+      <div class="login">
+        <form>
+          <div class="inputzone"> 
+            <input type="text" name="user_login" placeholder="请输入注册邮箱/手机号" ng-model="model.userName" id="dd">
+            <a href="#" class="fr" ng-click="cancel()"><i class="text-icon icon-close"></i></a>        
+          </div>
+          <div class="inputzone"> 
+            <input type="password" placeholder="请输入密码" ng-model="model.passWord" id="passWord">
+          </div>
+          <button type="submit" class="btn btn-primary" ng-click="submitLogin()">登录</button>
+        </form>
+        <div class="other-operation">
+          <span class="fr">
+            <a href="/pages/ForgetPassword/forgetpassword-phone.html">找回密码</a>
+          </span>
+          <a href="/pages/login/login-phone.html" class="fl">手机验证码登录</a> 
+        </div>
+      </div>
+      <div class="other">
+        <p>还没有账号？<a href="/pages/register/register-phone.html">立即注册</a></p>
+      </div>
+    </ion-tabs>
+  </body>
+</html>

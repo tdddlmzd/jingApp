@@ -1,0 +1,171 @@
+<ion-view ng-init="init()" hide-back-button="true" view-title="{{model.title}}">
+    <!-- <ion-nav-bar class="bar-stable">
+        <ion-nav-back-button></ion-nav-back-button>
+        <ion-nav-title>{{model.title}}</ion-nav-title>
+    </ion-nav-bar> -->
+    <ion-nav-buttons side="left">
+        <a ng-click="goBack()" class="button button-icon icon ion-ios-arrow-back" style="color: #fff;" nav-direction="back"></a>
+    </ion-nav-buttons>
+    <ion-content scroll="false" style="touch-action: none;">
+        <div>
+            <ul class="week">
+
+                <li ng-class="{'on': clickTabIndex == 1}" ng-click="TimeTypeClick(1,'')" id="NowTimeID">
+                    <a>
+                        <em>{{'sjcq_bz' | translate }}</em>{{model.Tab}}
+                    </a>
+                </li>
+
+                <li ng-class="{'on': clickTabIndex == 2}" ng-click="TimeTypeClick(2,'')" id="OneTimeID">
+                    <a>
+                        <em>{{'sjcq_xyz' | translate }}</em>{{model.OneTab}}
+                    </a>
+                </li>
+
+                <li ng-class="{'on': clickTabIndex == 3}" ng-click="TimeTypeClick(3,'')" id="TwoTimeID">
+                    <a>
+                        <em>{{'sjcq_xerz' | translate }}</em>{{model.TwoTab}}
+                    </a>
+                </li>
+
+                <li ng-class="{'on': clickTabIndex == 4}" ng-click="TimeTypeClick(4,'')" id="ThreeTimeID">
+                    <a>
+                        <em>{{'sjcq_xsz' | translate }}</em>{{model.ThreeTab}}
+                    </a>
+                </li>
+                <div class="c"></div>
+            </ul>
+            <div class="ship_libiao" ng-class="{true : 'ship_libiao_white',false : ''}[(direct.length==0&&model.sailType==true)||(transit.length==0&&model.sailType!=true)]">
+                <ion-scroll direction="y" scroll-height3 delegate-handle="myscroll">
+                    <ul class="ship_lei">
+                        <li ng-class="{'on': clicksailIndex == 1}" ng-click="sailTypeClick(1)" id="sailTypeZD">
+                            <a>{{'sjcq_zd' | translate }} 
+                                <!-- <em>{{'(' + directLength + ')'}}</em> -->
+                            </a>
+                        </li>
+                        <li ng-class="{'on': clicksailIndex == 2}" ng-click="sailTypeClick(2)" id="sailTypeZZ">
+                            <a>{{'sjcq_zz' | translate }} 
+                                <!-- <em>{{'(' + transitLength + ')'}}</em> -->
+                            </a>
+                        </li>
+                    </ul>
+
+                    <dl ng-if="direct.length==0&&model.sailType==true">
+                        <p class="img_p"><img src="/img/img_wushuju@2x.png" class="zwsj_img"></p>
+                        <p class="tishib">{{'sjcq_mqzusj' | translate }}</p>
+                    </dl>
+
+                    <dl ng-if="transit.length==0&&model.sailType!=true">
+                        <p class="img_p"><img src="/img/img_wushuju@2x.png" class="zwsj_img"></p>
+                        <p class="tishib">{{'sjcq_mqzusj' | translate }}</p>
+                    </dl>
+
+                    <!-- 直达绑定数据 -->
+                    <dl class="shiping_info" ng-click="sailScheduleDetail(item.voyageId,item.etd,item.pathId,item.state,item.wayType,item.totalId,item)" ng-if="model.sailType==true&&direct.length>0" ng-repeat="item in direct" ng-init="Startfather=$index">
+                        <dt>
+                            <em>
+                                <a class="#">{{item.staticEtdSort | ETDCNorEN}}&nbsp;&nbsp;&nbsp;{{item.editTransitTime ? item.editTransitTime : item.transTime ? item.transTime : item.totalDuration ? item.totalDuration : ''}}{{'sjcq_t' | translate }}</a>
+                            </em>
+                            <!-- <i ng-if="lan=='zh-cn'">{{item.polTerninal}}</i>
+                            <i ng-if="lan=='us-en'">{{item.polTerninalEn}}</i>
+                            <span ng-if="item.isOvt=='1'">{{'sjcqc_jbc' | translate }}</span>-->
+                        </dt>
+                        <dd>
+                            <b>
+                                <span  ng-repeat="itemSameRoute in item.sameRoute" ng-init="StartouterIndex=$index" class="flex_span">
+                                    <span ng-if="itemSameRoute.type=='0'" class="touc">{{itemSameRoute.carrierName}}({{itemSameRoute.disPlayName==''||itemSameRoute.disPlayName=='UNDEFINED'?(itemSameRoute.routeCode == 'UNDEFINED'? '-':itemSameRoute.routeCode):itemSameRoute.disPlayName}})</span>
+                                    <span ng-if="itemSameRoute.type!='0'" class="notou">{{itemSameRoute.carrierName}}({{itemSameRoute.disPlayName==''||itemSameRoute.disPlayName=='UNDEFINED'?(itemSameRoute.routeCode == 'UNDEFINED'? '-':itemSameRoute.routeCode):itemSameRoute.disPlayName}})</span>
+                                    <i ng-if="StartouterIndex!==(item.sameRoute.length-1)" class="b_i"></i>
+                                </span>
+                            </b>
+                            <div class="c"></div>
+                        </dd>
+                        <p>
+                            <b ng-if="item.state=='0'">{{'sjcq_tcdc' | translate }}：{{item.vessel}}<i class="gang"></i>{{item.voyage}}</b>
+                            <b ng-if="item.state!='0'">{{'sjcq_tcdc' | translate }}：{{'sjcq_zwsj' | translate }}</b>
+                            <span>
+                                <b ng-if="item.polTerninal && lan=='zh-cn'">{{'cq_mt' | translate }}：{{item.polTerninal}}<i class="gang"></i></b>
+                                <b ng-if="item.polTerninalEn && lan=='us-en'">{{'cq_mt' | translate }}：{{item.polTerninalEn}}<i class="gang"></i></b>
+                                <b>{{'sjcq_etd' | translate }}：{{GetTimeDay(item.staticEtdSort)}}</b>
+                                <!-- <b ng-if="item.state!='0'"></b> -->
+
+                                <em class="tingg" ng-if="item.isLate=='0'&&item.state=='0'" style="background-color: #0983f8;">{{'sjcq_zhund' | translate }}</em>
+                                <em class="tingg" ng-if="item.isLate=='1'&&item.state=='0'" style="background-color: #ff7676;">{{'sjcq_yanw' | translate }}</em>
+                                <em class="tingg" ng-if="item.isLate=='2'&&item.state=='0'" style="background-color: #26b4b2;">{{'sjcq_tq' | translate }}</em>
+
+                                <em class="tingg" ng-if="item.state !=='0'" style="background-color: #d1d1d1;">{{'sjcq_stop' | translate }}</em>
+                            </span>
+                        </p>
+                        <div class="c"></div>
+                    </dl>
+
+                    <!-- 中转数据绑定 -->
+                    <dl class="shiping_info" ng-click="sailScheduleDetail(itemT.voyageId,itemT.etd,itemT.pathId,itemT.state,itemT.wayType,itemT.totalId,itemT)" ng-if="model.sailType!=true&&transit.length>0" ng-repeat="itemT in transit" ng-init="father=$index">
+                        <dt>
+                            <em>
+                            <a class="#">{{itemT.staticEtdSort | ETDCNorEN}}&nbsp;&nbsp;&nbsp;<span class="totalDuration">{{itemT.editTransitTime ? itemT.editTransitTime : itemT.transTime ? itemT.transTime : itemT.totalDuration ? itemT.totalDuration : ''}}{{'sjcq_t' | translate }}</span><span ng-if="itemT.routeCodeList && itemT.routeCodeList.length > 0" class="routeCode">{{ 'sjcq_zz' | translate }}: {{itemT.routeCodeList[0].portName}}</span></a>
+                        </em>
+                            <!-- <i ng-if="lan=='zh-cn'">{{itemT.polTerninal}}</i>
+                            <i ng-if="lan=='us-en'">{{itemT.polTerninalEn}}</i>
+                            <span ng-if="itemT.isOvt=='1'">{{'sjcqc_jbc' | translate }}</span></dt> -->
+                        <dd>
+                            <b>
+                                <span ng-repeat="itemRoute in itemT.routeCodeList" ng-init="outerIndex=$index">
+                                    <!-- 铁路 -->
+                                    <b ng-if="itemRoute.flag=='RAIL'">
+                                        <i class="icon-railway"></i>{{'sjcq_tl' | translate }}
+                                        <i class="sright" ng-if="outerIndex!=(itemT.routeCodeList.length-1)"></i>           
+                                    </b>
+
+                                    <!-- 船(小湖那种) -->
+                                    <b ng-if="itemRoute.flag=='FEEDER'">
+                                        <i class="icon-ships"></i>{{'sjcq_bc' | translate }}
+                                        <i class="sright" ng-if="outerIndex!=(itemT.routeCodeList.length-1)"></i>           
+                                    </b>
+
+                                    <!-- 卡车 -->
+                                    <b ng-if="itemRoute.flag=='TRUCK'">
+                                        <i class="icon-land"></i>{{'sjcq_tc' | translate }}
+                                        <i class="sright" ng-if="outerIndex!=(itemT.routeCodeList.length-1)"></i>       
+                                    </b>
+
+                                    <!-- 正常 -->
+                                    <b ng-if="itemRoute.flag!='RAIL'&&itemRoute.flag!='FEEDER'&&itemRoute.flag!='TRUCK'">
+                                        {{itemT.carrierName}}({{itemRoute.disPlayName==''||itemRoute.disPlayName=='UNDEFINED'?(itemRoute.routeCode=='UNDEFINED'?'-':itemRoute.routeCode):itemRoute.disPlayName}})
+                                        <i class="sright" ng-if="outerIndex!=(itemT.routeCodeList.length-1)"></i>
+                                    </b>
+                                </span>
+                            </b>
+                            <!-- <b> 
+                                <i class="icon-railway"></i>
+                                COSCO(CI2)
+                            </b> -->
+                            <div class="c"></div>
+                        </dd>
+
+                        <p>
+                            <b ng-if="itemT.state=='0'">{{'sjcq_tcdc' | translate }}: {{itemT.vessel}}<i class="gang"></i>{{itemT.voyage}}</b>
+                            <b ng-if="itemT.state!='0'">{{'sjcq_tcdc' | translate }}：{{'sjcq_zwsj' | translate }}</b>
+                            <span>
+                                <b ng-if="itemT.polTerninal && lan=='zh-cn'">{{'cq_mt' | translate }}：{{itemT.polTerninal}}<i class="gang"></i></b>
+                                <b ng-if="itemT.polTerninalEn && lan=='us-en'">{{'cq_mt' | translate }}：{{itemT.polTerninalEn}}<i class="gang"></i></b>
+                                <b>{{'sjcq_etd' | translate }}：{{GetTimeDay(itemT.staticEtdSort)}}</b>
+
+                                <em class="tingg" ng-if="itemT.isLate=='0'&&itemT.state=='0'" style="background-color: #0983f8;">{{'sjcq_zhund' | translate }}</em>
+                                <em class="tingg" ng-if="itemT.isLate=='1'&&itemT.state=='0'" style="background-color: #ff7676;">{{'sjcq_yanw' | translate }}</em>
+                                <em class="tingg" ng-if="itemT.isLate=='2'&&itemT.state=='0'" style="background-color: #26b4b2;">{{'sjcq_tq' | translate }}</em>
+
+                                <em class="tingg" ng-if="itemT.state !=='0'" style="background-color: #d1d1d1;">{{'sjcq_stop' | translate }}</em>
+                                <!-- <em class="tingg" ng-if="itemT.state=='1'" style="background-color: #dcb000;">{{'sjcq_th' | translate }}</em>
+                                <em class="tingg" ng-if="itemT.state=='2'" style="background-color: #00b9ee;">{{'sjcq_tg' | translate }}</em>
+                                <em class="tingg" ng-if="itemT.state=='3'" style="background-color: #a8a8a8;">{{'sjcq_cmdd' | translate }}</em> -->
+
+                            </span>
+                        </p>
+                        <div class="c"></div>
+                    </dl>
+                </ion-scroll>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

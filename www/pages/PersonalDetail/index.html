@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link rel="manifest" href="/manifest.json">
+
+
+    <!-- <link href="/lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet"> -->
+    <link href="/css/common.css" rel="stylesheet" type="text/css" />
+    <link href="/css/base.css" rel="stylesheet" type="text/css" />
+
+    <!-- ionic/angularjs js -->
+    <script src="/lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="/cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="/js/app.js"></script>
+    <script src="/js/controllers.js"></script>
+    <script src="/js/PersonalDetailController.js"></script>
+
+    <script src="/js/services.js"></script>
+    <script src="/lib/ionic/js/angular-resource.min.js"></script>
+</head>
+
+<body ng-app="starter" style="background-color:#f3f3f3;">
+
+    <div ng-controller="PersonalDetailController" ng-init="init()">
+        <div class="view">
+            <div class="welcome-words">
+                <h1>个人信息</h1>
+                <a href="#" class="fl"><i class="text-icon icon-back"></i></a> <a href="#" class="fr"><i class="text-icon icon-more"></i></a></div>
+        </div>
+        <!--<div class="title2">二级文字标题信息
+          <p class="title_s">输入提示信息</p></div>-->
+        <ul class="mylist">
+            <li> 头像
+                <a href="#">
+                    <span><img src="../img/user_pic.jpg" class="user_pic_s"></span>
+                    <i class="text-icon icon-fr"></i>
+                </a>
+            </li>
+            <!-- <div style="width:70px;height:70px;margin-left:auto;margin-right: auto;margin-top:5%;border-radius:5px;" ng-click="addPhoto();">
+                ![](img/imgs/username.png)
+                <img ng-if="user.image!=1" src={{user.image}} style="width:60px;height:60px;margin-left:-15%;margin-top:2%">
+            </div> -->
+
+            <li> 昵称<a href="#"><span ng-model="$parent.username" id='username'></span><i class="text-icon icon-fr"></i></a></li>
+            <li> 性别<a href="#"><span>男/女</span><i class="text-icon icon-fr"></i></a></li>
+        </ul>
+        <ul class="mylist">
+            <li> 职务<a href="#"><span>市场部副局级</span><i class="text-icon icon-fr"></i></a></li>
+            <li> 所属公司<a href="#"><span>某宝国际物流有限公司乌鲁木齐份公司</span><i class="text-icon icon-fr"></i></a></li>
+        </ul>
+        <ul class="mylist">
+            <li> 手机<a href="#"><span>+86 155 897 7898</span><i class="text-icon icon-fr"></i></a></li>
+            <li> 座机<a href="#"><span>+86 0411 8899776688</span><i class="text-icon icon-fr"></i></a></li>
+            <li> 邮箱<a href="#"><span>123456789@hotmail.com</span><i class="text-icon icon-fr fr"></i></a></li>
+        </ul>
+        <ul class="mylist">
+            <li> <a href="#" class="quit">退出登陆</a></li>
+        </ul>
+
+    </div>
+</body>
+
+</html>

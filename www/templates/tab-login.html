@@ -1,0 +1,35 @@
+<ion-view view-title="" hide-back-button="true"><!-- 登录页面 -->
+    <ion-nav-buttons side="left">
+        <a ng-click="gotoHome()" class="button button-icon icon ion-ios-arrow-back" style="color: #fff;" nav-direction="back"></a>
+    </ion-nav-buttons>
+    <ion-content style="height: 94%;background: #072c4c;" scroll="false" padiing="true">
+        <!-- <div class="statusBarStyle"></div>
+        <div class="navigation">
+            <p class="navP" ng-click="gotoHome()"></p>
+        </div>       -->
+        <div class="login_title">{{'cq_dl' | translate }}<!-- 登录--></div>
+        <div ng-controller="loginController" class="login_content">
+            <div class="login_title2">{{'dlzc_qdlzhhmm'| translate}}<!-- 请输入账号和密码-->
+            </div>
+            <div class="login">
+                <form>
+                    <div class="inputzone">
+                        <input type="text" style="padding: 0;" name="user_login" placeholder="{{'dlzc_qsrsjhm'| translate}}" ng-model="model.userName" id="dd">
+                        <a class="fr" ng-click="canceluserName()"><i class=""></i></a>
+                    </div>
+                    <div class="inputzone">
+                        <input type="password" style="padding: 0;" placeholder="{{'dlzc_qsrmm'| translate}}" ng-model="model.passWord" id="passWord">
+                    </div>
+                    <button type="submit" class="btn btn-primary" ng-click="submitLogin()">{{'cq_dl'| translate}}<!-- 登录--></button>
+                </form>
+                <div class="other-operation"> <span class="fr"><a href="#/tab/forgetpassword/forgetpasswordphone">{{'dlzc_wjmm'| translate}}<!-- 忘记密码--></a></span><a href="#/tab/login/loginphone" class="fl">{{'dlzc_sjyzmdl'| translate}}<!-- 手机验证码登录--></a>
+                    <div class="c"></div>
+                </div>
+            </div>
+            <div class="c"></div>
+        </div>
+    </ion-content>
+    <div class="other">
+        <p>{{'dlzc_hmyzh'| translate}}<a href="#/tab/register/registerphone">{{'dlzc_ljzc'| translate}}<!-- 立即注册--></a></p>
+    </div>
+</ion-view>

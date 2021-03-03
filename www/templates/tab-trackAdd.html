@@ -1,0 +1,47 @@
+<ion-view view-title="" hide-back-button="true" hide-nav-bar="true">
+  <!-- <ion-nav-bar class="bar-stable">
+    <ion-nav-back-button></ion-nav-back-button>
+</ion-nav-bar> -->
+  <ion-content >
+    <form>
+      <div class="statusBarStyle"></div>
+      <!-- <div class="navigation">
+        <p class="navP" ng-click="goBackList()"></p>
+    </div>       -->
+      <div class="gen_bar"> 
+        <i class="icon_goback" ng-click="goBackList()"></i>
+        <p class="title_p">{{'sjgz_xhgz' | translate }}</p>
+        <i class="icon_trackLogo"></i>
+      </div>
+      <ul class="so_bar">
+        <!-- <h1 class="_so_bar_hi">
+          <b class="on">
+            <a >{{'sjgz_xh'|translate}}</a>
+          </b> 
+          <b ng-click="TotrackSearch()">
+            <a>{{'sjgz_cb'|translate}}</a>
+          </b>
+          <div class="c"></div>
+        </h1> -->
+        <div class="c"></div>
+        <li class="inputzone">
+          <p class="cq-qimu">{{'cq_mt' | translate }}</p>
+          <input type="text" name="" ng-model="model.polAndPolEN_track" on-touch="startportSearch_()" readonly="readonly" style="background: #FFFFFF;">
+          <i on-touch="startportSearch_()" class="text-icon icon-down"></i>
+        </li>
+        <li class="inputzone">
+          <p class="cq-qimu">{{'sjgz_tdhdchxhy' | translate }}</p>
+          <input type="text" name="" placeholder="{{'sjgz_ptdhdchxhy'|translate}}" ng-model-options="{ debounce: 400 }" ng-keypress="todoSomething($event)" ng-model="model.referenceno" ng-change="getCarrier()">
+        </li>
+        <li class="inputzone">
+          <p class="cq-qimu">{{'cq_cgs' | translate }}</p>
+          <input type="text" name="" placeholder="{{'gz_qxzcgs'|translate}}" ng-model="model.carriercd" on-touch="shipTouch()" readonly="readonly" style="background: #FFFFFF;">
+          <i on-touch="shipTouch()" class="text-icon icon-down"></i>
+        </li>
+        <li class="last">
+          <div class="but_bar"><button type="button" class="btn btn-primary" ng-click="addFunction()">{{'sjgz_gz'|translate}}</button></div>
+        </li>
+    </ul>
+    </form>
+  </ion-content>
+</ion-view>

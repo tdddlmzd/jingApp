@@ -1,0 +1,83 @@
+<!--
+Create tabs with an icon and label, using the tabs-positive style.
+Each tab's child <ion-nav-view> directive will have its own
+navigation history that also transitions its views in and out.
+-->
+<style>
+    .tab-nav,.tabs{
+        background: #fff;
+        box-shadow: 0px 1px 5px 0px 
+		rgba(0, 0, 0, 0.1);
+    }
+    /* 底部tab图标 杨卿林 2020-03-09*/
+    .ion-ios-on-chuanqi {
+        background: url(/img/icon-ship_on_2x.png) no-repeat 50% 50%;
+        background-size: 27px 27px;
+    }
+    
+    .ion-ios-off-chuanqi {
+        background: url(/img/icon-ship_2x.png) no-repeat center;
+        background-size: 27px 27px;
+    }
+    
+    .ion-ios-on-genzong {
+        background: url(/img/icon-gen_on_2x.png) no-repeat 50% 50%;
+        background-size: 27px 27px;
+    }
+    
+    .ion-ios-off-genzong {
+        background: url(/img/icon-gen_2x.png) no-repeat center;
+        background-size: 27px 27px;
+    }
+    
+    .ion-ios-on-wode {
+        background: url(/img/icon-my_on_2x.png) no-repeat 50% 50%;
+        background-size: 27px 27px;
+    }
+    
+    .ion-ios-off-wode {
+        background: url(/img/icon-my_2x.png) no-repeat center;
+        background-size: 27px 27px;
+    }
+    /*苹果手机安全区 杨卿林 20200319*/
+    
+    .global_ios {
+        margin-bottom: constant(safe-area-inset-bottom);
+        height: calc(100% - constant(safe-area-inset-bottom) - constant(safe-area-inset-top));
+        margin-top: constant(safe-area-inset-top);
+        background-color: transparent;
+    }
+</style>
+<!-- <ion-view ng-controller="tabShowHideController"> -->
+<ion-tabs class="tabs-icon-top tabs-color-active-positive" ng-controller="tabShowHideController" ng-if="is_my">
+    <!-- Dashboard Tab -->
+    <ion-tab title="{{'cq_cq'| translate}}" icon-off="ion-ios-off-chuanqi" icon-on="ion-ios-on-chuanqi" ng-click="toThisTab('sailSchedule')" ng-click="reloads()">
+        <ion-nav-view name="tab-sailSchedule" class="global_ios"></ion-nav-view>
+    </ion-tab>
+    <!-- Chats Tab -->
+    <ion-tab title="{{'sjcq_gz'| translate}}" icon-off="ion-ios-off-genzong" icon-on="ion-ios-on-genzong" ng-click="toThisTab('trackList')">
+        <ion-nav-view name="tab-trackList" class="global_ios"></ion-nav-view>
+    </ion-tab>
+
+    <!-- Account Tab -->
+    <ion-tab title="{{'sjcq_wd'| translate}}" id="is_my_tabs" icon-off="ion-ios-off-wode" icon-on="ion-ios-on-wode" ng-click="toThisTab('my')">
+        <ion-nav-view name="tab-my" class="global_ios"></ion-nav-view>
+    </ion-tab>
+</ion-tabs>
+
+<ion-tabs class="tabs-icon-top tabs-color-active-positive" ng-controller="tabShowHideController" ng-if="!is_my">
+    <!-- Dashboard Tab -->
+    <ion-tab title="{{'cq_cq'| translate}}" icon-off="ion-ios-off-chuanqi" icon-on="ion-ios-on-chuanqi" ng-click="toThisTab('sailSchedule')" ng-click="reloads()">
+        <ion-nav-view name="tab-sailSchedule" class="global_ios"></ion-nav-view>
+    </ion-tab>
+
+    <!-- Chats Tab -->
+    <ion-tab title="{{'sjcq_gz'| translate}}" icon-off="ion-ios-off-genzong" icon-on="ion-ios-on-genzong" ng-click="toThisTab('trackList')">
+        <ion-nav-view name="tab-trackList" class="global_ios"></ion-nav-view>
+    </ion-tab>
+
+    <ion-tab title="{{'cq_dl' | translate }}" id="is_log_tabs" icon-off="ion-ios-off-wode" icon-on="ion-ios-on-wode" ng-click="toThisTab('login')">
+        <ion-nav-view name="tab-my" class="global_ios"></ion-nav-view>
+    </ion-tab>
+</ion-tabs>
+<!-- </ion-view> -->

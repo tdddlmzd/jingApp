@@ -1,0 +1,36 @@
+<ion-view title="详情页-VIP" ng-init="vipDetailInit()">
+  <ion-content class="padding">
+    <p>
+      ID：{{paramId}}
+    </p>
+  </ion-content>
+
+  <div class="jia_bottm div" id="div"><i class="icon_add"></i></div>
+
+  <ion-content class="padding" style="margin-top: 50px;">
+    <input type="text" id="_dateTimePicker" value="2020-04-5" class="input" placeholder="点击我选择日期"
+      style="border: none;background-color: #fff;" readonly />
+  </ion-content>
+
+  <ion-content class="padding" style="margin-top: 100px;">
+    <input type="text" id="singlePicker_dummy" style="border: none;background-color: #fff;" readonly="" placeholder="">
+    <select id="singlePicker" style="display: none;">
+      <option value="0">+86</option>
+      <option value="1" selected>+89</option>
+    </select>
+  </ion-content>
+
+  <ion-content class="padding" style="margin-top: 150px;">
+    <input type="text" id="treelist_dummy" style="border: none;background-color: #fff;" readonly="" placeholder=""
+      value="3">
+    <ul id="treelist">
+      <li>普通班</li>
+      <li>VIP班</li>
+      <li>特色班</li>
+      <li>至尊班</li>
+      <li>女子特训班</li>
+    </ul>
+  </ion-content>
+
+
+</ion-view>

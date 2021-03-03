@@ -1,0 +1,44 @@
+<ion-view view-title=""  hide-back-button="false">
+    <ion-content ng-controller="trackController" ng-init="searchInit()">
+      <form>
+        <div class="gen_bar"> <p class="title_p">{{'sjgz_wdgz' | translate }}</p><i class="icon_trackLogo"></i></div>
+        <ul class="so_bar">
+          <h1>
+            <b ng-click="addTrack()">
+              <a>{{'sjgz_xh'|translate}}</a>
+            </b> <b class="on">
+              <a >{{'sjgz_cb'|translate}}</a>
+            </b>
+          </h1>
+          <div class="c"></div>
+          <li class="inputzone">
+            <p class="cq-qimu">{{'sjcq_qis' | translate }}</p>
+            <input type="text" name="" placeholder="{{'sjcq_qxzqyg'|translate}}" ng-model="model.polAndPolEN_cb" on-touch="startportSearch_()"><i class="text-icon icon-down"></i>
+          </li>
+          <li class="inputzone">
+            <p class="cq-qimu">{{'sjcq_mud' | translate }}</p>
+            <input type="text" name="" placeholder="{{'sjcq_qxzmdg'|translate}}" ng-model="model.podAndPolEN_cb"  on-touch="endportSearch()"><i class="text-icon icon-down"></i>
+          </li>
+          <li class="inputzone">
+            <p class="cq-qimu">{{'sjcq_riq' | translate }}</p>
+            <input type="text" class="seldate" id="dateTimePicker" style="background-color: #fff">
+            <div id="radio_s" class="sf-checked" type="radio">
+              <div class="sf-checked-item " value="1" ng-click="PortCheck('ligang')" id="ligang" style="width: 20%;float: right;" checked="checked">
+                <span class="sf-radio-icon sf-radio-selected"></span><label>{{'sjcq_lg'|translate}}</label>
+              </div>
+              <div class="c"></div>
+            </div>
+            <div class="c"></div>
+          </li>
+          <li class="last">
+            <div class="but_bar"><button ng-click="CB_search()" class="btn btn-primary">{{'cq_cx'|translate}}</button></div>
+        </li>
+          </ul>
+      </form>
+      <ul class="so_list">
+        <li ng-repeat="item in sailModel_track.slice().reverse() track by $index" ><a ng-click="historyselect(item.selectValue)">{{item.value}}</a> 
+          <a ng-click="delete($index)" class="fr"> <i class="text-icon icon-close" ></i></a>
+        </li>        
+      </ul>
+    </ion-content>
+  </ion-view>

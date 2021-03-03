@@ -1,0 +1,76 @@
+Running command: node C:\YANGQINGLIN\project\myApp2_20200312\myApp2\hooks\after_prepare\010_add_platform_class.js C:\YANGQINGLIN\project\myApp2_20200312\myApp2
+Checking Java JDK and Android SDK versions
+ANDROID_SDK_ROOT=undefined (recommended setting)
+ANDROID_HOME=C:\YANGQINGLIN\software\android-sdk_r24.4.1-windows\android-sdk-windows (DEPRECATED)
+Subproject Path: CordovaLib
+Subproject Path: app
+> Task :app:preBuild UP-TO-DATE
+> Task :CordovaLib:preBuild UP-TO-DATE
+> Task :CordovaLib:preDebugBuild UP-TO-DATE
+> Task :CordovaLib:checkDebugManifest UP-TO-DATE
+> Task :CordovaLib:processDebugManifest UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :CordovaLib:compileDebugAidl NO-SOURCE
+> Task :app:compileDebugAidl NO-SOURCE
+> Task :CordovaLib:packageDebugRenderscript NO-SOURCE
+> Task :app:compileDebugRenderscript UP-TO-DATE
+> Task :app:checkDebugManifest UP-TO-DATE
+> Task :app:generateDebugBuildConfig UP-TO-DATE
+> Task :app:prepareLintJar UP-TO-DATE
+> Task :app:generateDebugSources UP-TO-DATE
+> Task :CordovaLib:compileDebugRenderscript UP-TO-DATE
+> Task :CordovaLib:generateDebugBuildConfig UP-TO-DATE
+> Task :CordovaLib:generateDebugResValues UP-TO-DATE
+> Task :CordovaLib:generateDebugResources UP-TO-DATE
+> Task :CordovaLib:packageDebugResources UP-TO-DATE
+> Task :CordovaLib:generateDebugRFile UP-TO-DATE
+> Task :CordovaLib:prepareLintJar UP-TO-DATE
+> Task :CordovaLib:generateDebugSources UP-TO-DATE
+> Task :CordovaLib:javaPreCompileDebug UP-TO-DATE
+> Task :CordovaLib:compileDebugJavaWithJavac UP-TO-DATE
+> Task :CordovaLib:processDebugJavaRes NO-SOURCE
+> Task :CordovaLib:transformClassesAndResourcesWithPrepareIntermediateJarsForDebug UP-TO-DATE
+> Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :app:mainApkListPersistenceDebug UP-TO-DATE
+> Task :app:generateDebugResValues UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:mergeDebugResources
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:processDebugManifest UP-TO-DATE
+> Task :app:processDebugResources
+> Task :app:compileDebugJavaWithJavac
+> Task :app:compileDebugNdk NO-SOURCE
+> Task :app:compileDebugSources
+> Task :app:mergeDebugShaders UP-TO-DATE
+> Task :app:compileDebugShaders UP-TO-DATE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :CordovaLib:mergeDebugShaders UP-TO-DATE
+> Task :CordovaLib:compileDebugShaders UP-TO-DATE
+> Task :CordovaLib:generateDebugAssets UP-TO-DATE
+> Task :CordovaLib:packageDebugAssets UP-TO-DATE
+> Task :app:mergeDebugAssets
+> Task :app:validateSigningDebug UP-TO-DATE
+> Task :app:signingConfigWriterDebug UP-TO-DATE
+> Task :app:transformClassesWithDexBuilderForDebug
+> Task :app:transformDexArchiveWithExternalLibsDexMergerForDebug
+> Task :app:transformDexArchiveWithDexMergerForDebug
+> Task :app:mergeDebugJniLibFolders UP-TO-DATE
+> Task :CordovaLib:compileDebugNdk NO-SOURCE
+> Task :CordovaLib:mergeDebugJniLibFolders UP-TO-DATE
+> Task :CordovaLib:transformNativeLibsWithMergeJniLibsForDebug UP-TO-DATE
+> Task :CordovaLib:transformNativeLibsWithIntermediateJniLibsForDebug UP-TO-DATE
+> Task :app:transformNativeLibsWithMergeJniLibsForDebug UP-TO-DATE
+> Task :app:processDebugJavaRes NO-SOURCE
+> Task :app:transformResourcesWithMergeJavaResForDebug
+> Task :app:packageDebug
+> Task :app:assembleDebug
+> Task :app:cdvBuildDebug
+
+BUILD SUCCESSFUL in 1m 23s
+42 actionable tasks: 9 executed, 33 up-to-date
+Built the following apk(s): 
+	C:\YANGQINGLIN\project\myApp2_20200312\myApp2\platforms\android\app\build\outputs\apk\debug\app-debug.apk
+	C:\YANGQINGLIN\project\myApp2_20200312\myApp2\platforms\android\app\build\outputs\apk\debug\app-debug_20200313_3.apk
+	C:\YANGQINGLIN\project\myApp2_20200312\myApp2\platforms\android\app\build\outputs\apk\debug\app-debug_20200313_2.apk
+	C:\YANGQINGLIN\project\myApp2_20200312\myApp2\platforms\android\app\build\outputs\apk\debug\app-debug_20200313.apk
+	C:\YANGQINGLIN\project\myApp2_20200312\myApp2\platforms\android\app\build\outputs\apk\debug\app-debug_20200312_2.apk

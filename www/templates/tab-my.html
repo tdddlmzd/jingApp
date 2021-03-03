@@ -1,0 +1,46 @@
+<ion-view view-title="" hide-back-button="false" can-swipe-back="false"><!-- 我的页面 -->
+    <!-- <ion-nav-bar class="bar-stable">
+    </ion-nav-bar> -->
+    <ion-content has-bouncing="false">
+        <div ng-controller="myController" ng-init="myinit()">
+            <ul class="u_bar">
+                <a href="#/tab/my/1//">
+                    <div class="user_pic" ><img id="upimage" src="img/user.png" width="206"></div>
+                    <li class="username">
+                        {{model.Namenc}}
+                        <span id="PositionId" style="display: none;">{{model.Position}}</span>
+                        <div class="c"></div>
+                    </li>
+                    <li class="cpname">{{model.Company}}</li>
+                    <i class="text-icon icon-fr"></i>
+                </a>
+            </ul>
+            <ul class="mylist1">
+                <!-- 在线客服-->
+                <li ng-click="openQQ()">
+                    <i class="text-icon icon-fu1"></i>{{'sjqty_zxkf'| translate}}
+                    <a>
+                        <i class="text-icon icon-fr"></i>
+                    </a>
+                </li>
+                <!-- 语言-->
+                <li class="last">
+                    <i class="text-icon icon-lug"></i>{{'sjqty_yy'| translate}}
+                    <div id="radio_l" class="sf-checked" type="radio">
+                        <div class="sf-checked-item" value='1' id="zh" ng-click="changezh()">{{'sjqty_language'| translate}}</div>
+                        <div class="sf-checked-item" value='2' id="en" ng-click="changeen()">{{'sjqty_english'| translate}}</div>
+                        <div class="c"></div>
+                    </div>
+                </li>
+                <!-- 关于-->
+                <li ng-click="toAbout()">
+                    <i class="text-icon icon-about"></i>{{'sjqty_gy'| translate}}
+                    <a>
+                        <i class="text-icon icon-fr"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </ion-content>
+</ion-view>

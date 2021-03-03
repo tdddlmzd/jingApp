@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <title>注册</title>
+
+  
+  <link rel="manifest" href="/manifest.json">
+
+  <!-- un-comment this code to enable service worker
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(() => console.log('service worker installed'))
+          .catch(err => console.log('Error', err));
+      }
+    </script>-->
+
+  <link href="/lib/ionic/css/ionic.css" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet">
+
+  <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+  <!-- ionic/angularjs js -->
+  <script src="/lib/ionic/js/ionic.bundle.js"></script>
+
+  <!-- cordova script (this will be a 404 during development) -->
+  <script src="/cordova.js"></script>
+
+  <!-- your app's js -->
+  <script src="/js/app.js"></script>
+  <script src="/js/services.js"></script>
+  <script src="/lib/ionic/js/angular-resource.min.js"></script>
+</head>
+
+<body ng-app="starter">
+
+  <div class="bar bar-header bar-light">
+    <h1 class="title" style="text-align: left;">请输入账号和密码</h1>
+  </div>
+  <div class="content has-header">
+    <div class="list">
+      <select>
+        <option>Blue</option>
+        <option selected="">Green</option>
+        <option>Red</option>
+      </select>
+      <label class="item item-input">
+        <input type="text" placeholder="请输入用户名" ng-model="$parent.userName">
+      </label>
+    </div>
+    <div class="padding" style="height: 105px;">
+      <button class="button button-block button-positive" ng-click='submitLogin()'>注册</button>
+    </div>
+
+    <script src="/js/registerController.js"></script>
+</body>
+
+</html>

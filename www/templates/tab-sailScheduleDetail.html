@@ -1,0 +1,181 @@
+<ion-view hide-nav-bar="true">
+    <ion-content overflow-scroll="true" style="overflow: hidden;">
+        <div ng-init="init()">
+            <!-- <div class="sp-map"></div> -->
+
+            <!-- 地图组件 -->
+            <div id="sailMap" class="sp-map" data-tap-disabled="true" ng-style="mapHeight">
+            </div>
+            <!-- 船期信息 开始 -->
+            <div ng-click="goBack()" class="mapButton"></div>
+            <div on-swipe="DetailIdDrag($event)" class="tab_bar" style="display: block;" ng-style="topHeight" id="DetailId">
+                <h1 on-drag="onDrag($event);" on-release="onRelease()" on-touch="onTouch()" style="height:26px;background-color: #FFFFFF;" class="tab_h1"></h1>
+                <div style=" height:500px; display: block; overflow: hidden;background-color: #FFFFFF;" id="overflowDiv">
+                    <div class="shippings">
+                        <div class="popdinfor">
+                            <div class="start">
+                                <p class="polpod">{{sailScheduleDetail.pol.toUpperCase()}}</p>
+                                <p class="etdeta">ETD:{{GetTime(sailScheduleDetail.staticEtdSort)}}</p>
+                            </div>
+                            <div class="center">
+                                <p class="center_jain" ng-class="{true : '',false : 'transparent'}[sailScheduleDetail.editTransitTime !== '' || sailScheduleDetail.transTime !== '' || sailScheduleDetail.totalDuration !== '']">{{sailScheduleDetail.editTransitTime ? sailScheduleDetail.editTransitTime : sailScheduleDetail.transTime ? sailScheduleDetail.transTime : sailScheduleDetail.totalDuration ? sailScheduleDetail.totalDuration : ''}}{{'sjcq_t' | translate }}</p>
+                                <p class="image"></p>
+                                <p ng-if="sailScheduleDetail.isTransit!=='1'" class="isTransit">{{'sjcq_zd' | translate }}</p>
+                                <p ng-if="sailScheduleDetail.isTransit=='1'" class="isTransit">{{'sjcq_zz' | translate }}</p>
+                            </div>
+                            <div class="end">
+                                <p class="polpod">{{sailScheduleDetail.pod.toUpperCase()}}</p>
+                                <p class="etdeta">ETA:{{GetTime(sailScheduleDetail.staticEtaSort)}}</p>
+                            </div>
+                        </div>
+                        <!-- <h2>
+                            <i class="text-icons icon-stit" style="background-image: url({{shipLogoUrl}}{{sailScheduleDetail.scac}}2.png);"></i> {{sailScheduleDetail.vessel}}/{{sailScheduleDetail.voyage}}
+                            <span class="fr" ng-if="sailScheduleDetail.isOvt=='1'">{{'sjcqc_jbc' | translate }}</span>
+                        </h2> -->
+                        <!-- <dl>
+                            <dd>
+                                <a>{{sailScheduleDetail.pol.toUpperCase()}}</a>
+                                ETD {{sailScheduleDetail.staticEtd.length>9?sailScheduleDetail.staticEtd.substr(5,5):sailScheduleDetail.staticEtd}}
+                            </dd>
+                            <dt>
+                                <b>{{sailScheduleDetail.totalDuration}}{{'sjcq_t' | translate }}</b> 
+                                <b ng-if="sailScheduleDetail.isTransit=='0'">{{'sjcq_zd' | translate }}</b>
+                                <b ng-if="sailScheduleDetail.isTransit=='1'">{{'sjcq_zz' | translate }}</b>
+                            </dt>
+                            <dd class="fr">
+                                <a>{{sailScheduleDetail.pod.toUpperCase()}}</a>
+                                ETA {{sailScheduleDetail.staticEta.length>9?sailScheduleDetail.staticEta.substr(5,5):sailScheduleDetail.staticEta}}
+                            </dd>
+                        </dl> -->
+                        <!-- 直达 -->
+                        <!-- <p class="zw" ng-if="sailScheduleDetail.isTransit=='0'">
+                            <ul class="gongcx">
+                                <li></li>
+                            </ul>
+                            <span ng-repeat="itemS in sailScheduleDetail.sameRoute">
+                                <span ng-if="$index!='0'">/</span> {{itemS.carrierName}}({{itemS.routeCode}})
+                            </span>
+                        </p> -->
+                        <!-- 直达 -->
+                        <ul class="gongcx" ng-if="sailScheduleDetail.isTransit !== '1'">
+                            <li ng-repeat="itemS in sailScheduleDetail.sameRoute">
+                                <span ng-if='itemS.type == 0' class="lanColor">{{itemS.carrierName}}({{itemS.disPlayName==''||itemS.disPlayName=='UNDEFINED'?(itemS.routeCode == 'UNDEFINED'? '-':itemS.routeCode):itemS.disPlayName}})</span>
+                                <span ng-if='itemS.type !== 0' class="fColor">{{itemS.carrierName}}({{itemS.disPlayName==''||itemS.disPlayName=='UNDEFINED'?(itemS.routeCode == 'UNDEFINED'? '-':itemS.routeCode):itemS.disPlayName}})</span>
+                                <span ng-if="$index!=(sailScheduleDetail.sameRoute.length-1)" class="srightLine" ></span> 
+                            </li>
+                        </ul>
+                        <!-- 中转 -->
+                        <ul class="gongcx" ng-if="sailScheduleDetail.isTransit == '1'">
+                            <li ng-repeat="itemS in sailScheduleDetail.routeCodeList">
+                                <!-- <span ng-if='itemS.type == 0' class="lanColor">{{itemS.carrierName}}({{itemS.disPlayName}})</span> -->
+                                <!-- <span class="fColor">{{itemS.carrierName}}({{itemS.disPlayName}})</span>
+                                <span ng-if="$index!=(sailScheduleDetail.routeCodeList.length-1)" class="srightLine" ></span>  -->
+
+                                    <!-- 正常 -->
+                                    <span ng-if="itemS.flag !=='RAIL' && itemS.flag!== 'FEEDER' && itemS.flag!== 'TRUCK'">
+                                        {{sailScheduleDetail.carrierName}}({{itemS.disPlayName==''||itemS.disPlayName=='UNDEFINED'?(itemS.routeCode=='UNDEFINED'?'-':itemS.routeCode):itemS.disPlayName}})
+                                    </span>
+                                    <!-- 铁路 -->
+                                    <span ng-if="itemS.flag=='RAIL'" style="display: flex;align-items: center;">           
+                                        <i class="icon-railway"></i>{{'sjcq_tl' | translate }}
+                                    </span>
+        
+                                    <!-- 船(小湖那种) -->
+                                    <span ng-if="itemS.flag =='FEEDER'" style="display: flex;align-items: center;">           
+                                        <i class="icon-ships"></i>{{'sjcq_bc' | translate }}
+                                    </span>
+        
+                                    <!-- 卡车 -->
+                                    <span ng-if="itemS.flag=='TRUCK'" style="display: flex;align-items: center;">           
+                                        <i class="icon-land"></i>{{'sjcq_tc' | translate }}
+                                    </span>
+                                    <span class="gx_sright" ng-if="$index !== sailScheduleDetail.routeCodeList.length - 1"></span>
+                                </li>
+                        </ul>
+                        <!-- 中转 -->
+                        <!-- <p class="zw" ng-if="sailScheduleDetail.isTransit=='1'"><b>{{'sjcq_gcc' | translate }}：</b>
+                            <span ng-repeat="itemR in sailScheduleDetail.routeCodeList">
+                        <span ng-if="$index!='0'">/</span> {{sailScheduleDetail.carrierName}}({{itemR.disPlayName}})
+                            </span>
+                        </p> -->
+                    </div>
+                    <!-- 船期路径隐藏框开始 -->
+                    <div class="showUl">
+                        <p class="icon-p" ng-click="openFun()" ng-show="!isshow">
+                            <span class="title">{{ 'sjcq_ckwzlj' | translate }}</span>
+                            <span class="icon-morea"></span>
+                        </p>
+                        <p class="icon-p"ng-click="closeFun()" ng-show="isshow">
+                            <span class="title">{{ 'sjcq_sqlwz' | translate }}</span>
+                            <span class="icon-moreb"></span>
+                        </p>
+                        <ul class="cq_box" ng-show="isshow" style="display: block">
+                            <!-- 起运港 计划离港 -->
+                            <li class="cq_box_li" ng-repeat="item in pathList track by $index">
+                                <h1 class="ng-tit">
+                                    <p class="bigNode lan_tit_fang"></p>
+                                    <p ng-if="lan=='zh-cn'" class="tit_nameCn">{{item.basePortCn}}</p>
+                                    <p ng-if="lan=='us-en'" class="tit_nameCn">{{item.basePortEn}}</p>
+                                </h1>
+                                <div class="ng_div">
+                                    <span class="yuan_node" ng-if="item.str"></span>
+                                    <span class="node" ng-if="item.str == '计划离港'">{{ 'sjcq_jhlg' | translate }}</span>
+                                    <span class="time" ng-if="item.str == '计划离港'">{{ GetTimeDay(item.etd) }}</span>
+                                    <span class="node" ng-if="item.str == '计划到港'">{{ 'sjcq_jhdg' | translate }}</span>
+                                    <span class="time" ng-if="item.str == '计划到港'">{{ GetTimeDay(item.eta) }}</span>
+                                    <span class="late" ng-if="sailScheduleDetail.isLate=='0' && item.str == '计划离港'" style="background-color: #0983f8;">{{'sjcq_zhund' | translate }}</span>
+                                    <span class="late" ng-if="sailScheduleDetail.isLate=='1' && item.str == '计划离港'" style="background-color: #ff7676;">{{'sjcq_yanw' | translate }}</span>
+                                    <span class="late" ng-if="sailScheduleDetail.isLate=='2' && item.str == '计划离港'" style="background-color: #26b4b2;">{{'sjcq_tq' | translate }}</span>
+                                </div>
+                                <div ng-if="item.isShowVess && (item.str !== '计划到港' || !item.str)" class="vessel_ul">
+                                    <div class="vessel_li">
+                                        <p class="vessel_li_name">{{'cq_cm'|translate}}</p>
+                                        <p class="vessel_li_span">{{item.vesselInfo.vessel}}</p>
+                                    </div>
+                                    <div class="vessel_li">
+                                        <p class="vessel_li_name">{{'cq_hc'|translate}}</p>
+                                        <p class="vessel_li_span">{{item.vesselInfo.voyage}}</p>
+                                    </div>
+                                    <div class="vessel_li">
+                                        <p class="vessel_li_name">{{'sjcq_hxdm'|translate}}</p>
+                                        <p class="vessel_li_span">{{item.vesselInfo.routeCode}}</p>
+                                    </div>
+                                </div>
+                                <!-- 途经港口 -->
+                                <div class="wayPort" ng-if="item.str !== '计划到港' || !item.str">
+                                    <div class="wayPort_high" ng-if="item.docking.length > 0">
+                                        {{ 'sjcq_tjgk' | translate }} {{ "(" + item.docking.length  + ")" }}
+                                    </div>
+                                    <ul class="way_ul">
+                                        <li class="way_li" ng-repeat="dock in item.docking track by $index">
+                                            <span class="node">
+                                                <span class="yuan_node"></span>
+                                                {{dock}}
+                                            </span>
+                                        </li>
+                                    </ul>
+                            </div>
+                            <!-- 亮的图标 -->
+                            <img src="../img/genzong_chuanbo@2x.png" class="imageChuan" ng-if="item.str !== '计划到港'">                            
+                          </li>
+                        </ul>
+                    </div>
+                    <!-- 船期路径隐藏框结束 -->
+                    <!-- <div class="shippings" style="height: 30px;z-index: -1;background: none;"></div> -->
+                    <!-- 船期信息 结束 -->
+                </div>
+            </div>
+        </div>
+
+    </ion-content>
+    <ul class="bootms" style="height: auto;border-top: none;">
+        <!-- 已跟踪 -->
+        <div class="but_bar" style="padding: 10px 30px 10px;display: none;" id="TiDan">
+            <a ng-click="openQQ()" class="sail_but_esc">{{'sjcq_cwfk' | translate }}</a>
+            <!-- <a class="sail_but_up">{{'sjcq_ygz' | translate }}</a> -->
+        </div>
+        <div class="but_bar1" id="GenZong" style="display: none;">
+            <a ng-click="openQQ()" class="sail_but_esc">{{'sjcq_cwfk' | translate }}</a>
+        </div>
+    </ul>
+</ion-view>

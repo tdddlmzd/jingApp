@@ -1,0 +1,30 @@
+<ion-view view-title="" can-swipe-back=”false” hide-back-button="false"><!-- 个人信息————修改昵称页面 -->
+    <!-- <ion-nav-bar class="bar-stable">
+        <ion-nav-back-button></ion-nav-back-button>
+    </ion-nav-bar> -->
+    <ion-content>
+        <div ng-controller="myController" ng-init="mydetaileditinit()">
+            <!-- <div class="statusBarStyle"></div>
+            <div class="navigation">
+                <p class="navP" ng-click="goBackMyDetail()"></p>
+            </div> -->
+            <div class="my_bar"> <p class="title_p">{{'sjqty_grxx' | translate }}</p></div>
+            <div class="my_detail">
+                <div class="title2">{{model.placehode}}
+                </div>
+                <div class="login">
+                    <form>
+                        <input type="hidden" id="type" name="user_login" value="">
+                        <div class="inputzone">
+                            <input type="text" style="width: 87%;font-weight: 600;padding-left: 0;" id="editname" name="user_login" placeholder="{{model.placehode}}" ng-model="model.editname">
+                            <a class="fr" ng-click="cancelName()"><i class="text-icon icon-close"></i></a>
+                        </div>
+                        <!--<div class="inputzone"> 
+                           <input type="password" placeholder="请输入密码"></div>-->
+                        <button type="submit" class="btn btn-primary" ng-click="save()">{{'dlzc_bc'| translate}}<!-- 保存--></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

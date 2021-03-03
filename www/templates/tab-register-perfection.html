@@ -1,0 +1,56 @@
+<ion-view view-title="" hide-back-button="true"><!-- 注册页面-->
+    <!-- <ion-nav-bar class="bar-stable">
+        <ion-nav-back-button></ion-nav-back-button>
+    </ion-nav-bar> -->
+    <ion-nav-buttons side="left">
+        <a ng-click="Register()" class="button button-icon icon ion-ios-arrow-back" style="color: #fff;" nav-direction="back"></a>
+    </ion-nav-buttons>
+    <ion-content style="background: #072c4c;" padiing="true" scroll="false">
+        <!-- <div class="statusBarStyle"></div>
+        <div class="navigation">
+            <p class="navP" ng-click="goBack()"></p>
+        </div> -->
+        <div class="login_title">{{'dlzc_zc' | translate }}<!-- 注册--></div>
+        <div ng-controller="registerController" class="login_content">
+            <div class="login_title2" style="padding-bottom: 12px;">{{'dlzc_wsxx'| translate}}<!-- 完善信息-->
+            </div>
+            <p class="title_s">{{'dlzc_txxxzdn'| translate}}</p>
+            <div class="login">
+                <form>
+                    <div class="inputzone_s">
+                        <input type="text" name="user_login" placeholder="{{'dlzc_qsrzsxm'| translate}}" ng-model="model.Name">
+                        <!-- 请输入昵称-->
+                        <a class="fr" ng-click="cancelName()"><i class="text-icon icon-close" style="margin-top: 4px;"></i></a>
+                    </div>
+                    <div class="inputzone_s">
+                        <input type="password" name="user_login" placeholder="{{'dlzc_mm6w'| translate}}" ng-model="model.Pass">
+                        <!-- 设置密码，不低于6位-->
+                        <a class="fr" ng-click="cancelPass()"><i class="text-icon icon-close" style="margin-top: 4px;"></i></a>
+                    </div>
+                    <div class="inputzone_s">
+                        <input type="text" name="user_login" placeholder="{{'dlzc_qsrgsmc'| translate}}" ng-model="model.Company">
+                        <!-- 请输入企业名称-->
+                        <a class="fr" ng-click="cancelCompany()"><i class="text-icon icon-close" style="margin-top: 4px;"></i></a>
+                    </div>
+                    <div class="inputzone_s">
+                        <input type="text" name="user_login" placeholder="{{'dlzc_qsrgszw'| translate}}" ng-model="model.Position">
+                        <!-- 请输入职位-->
+                        <a class="fr" ng-click="cancelPosition()"><i class="text-icon icon-close" style="margin-top: 4px;"></i></a>
+                    </div>
+                    <!-- <div class="inputzone_s">
+                        <input type="text" name="user_login" placeholder="{{'dlzc_qsryqm'| translate}}" ng-model="model.inviteCode">
+                        <a class="fr" ng-click="cancelinviteCode()"><i class="text-icon icon-close" style="margin-top: 4px;"></i></a>
+                    </div> -->
+                    <button type="submit" class="btn btn-primary" ng-click="registerSubmit()">{{'dlzc_wczc'| translate}}<!-- 完成注册--></button>
+                </form>
+                <!--<div class="other-operation"> <span class="fr"><a href="#">找回密码</a></span><a href="#" class="fl">手机验证码登录</a></div>-->
+            </div>
+
+        </div>
+
+    </ion-content>
+    <div class="other" ng-click="goxy()">
+        <p>{{'dlzc_wczcjdbnty'| translate}}<span style="color: #0983f8;">{{'dlzc_jjyhxy'| translate}}</span></p>
+        <!--完成注册即代表您同意 鲸准用户注册协议-->
+    </div>
+</ion-view>
